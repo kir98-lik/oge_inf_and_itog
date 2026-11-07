@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Образовательный портал | ОГЭ 2027</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        color: #fff;
+    }
+    .container {
+        max-width: 1100px;
+        width: 100%;
+        text-align: center;
+    }
+    h1 {
+        font-size: 38px;
+        font-weight: 900;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    p.subtitle {
+        font-size: 16px;
+        opacity: 0.85;
+        margin-bottom: 50px;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    .card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 40px 25px;
+        text-decoration: none;
+        color: #fff;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+    .card .icon { font-size: 65px; margin-bottom: 20px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+    .card h2 { font-size: 22px; margin-bottom: 15px; font-weight: 700; }
+    .card p { font-size: 14px; opacity: 0.85; text-align: center; line-height: 1.6; }
+    .card .tag {
+        margin-top: 20px;
+        background: #e74c3c;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Образовательный портал</h1>
+    <p class="subtitle">Выберите тренажёр для подготовки к экзаменам</p>
+
+    <div class="grid">
+        <!-- Карточка 1: Тренажёр по информатике -->
+        <a href="trainer.html" class="card">
+            <div class="icon">📚</div>
+            <h2>Информатика (Теория)</h2>
+            <p>Классический тренажёр по заданиям ОГЭ. Проверка ответов, разбор ошибок и подробные решения.</p>
+            <div class="tag" style="background: #3498db;">ОГЭ ИНФОРМАТИКА</div>
+        </a>
+
+        <!-- Карточка 2: Игра Марио -->
+        <a href="game.html" class="card">
+            <div class="icon">🎮</div>
+            <h2>Информатика (Марио)</h2>
+            <p>Игровой формат подготовки. Прыгайте по блокам, зарабатывайте монеты и решайте задачи ОГЭ.</p>
+            <div class="tag" style="background: #e74c3c;">ИГРОВОЙ РЕЖИМ</div>
+        </a>
+
+        <!-- Карточка 3: Русский язык -->
+        <a href="speaking.html" class="card">
+            <div class="icon">🎙️</div>
+            <h2>Русский язык (Устный)</h2>
+            <p>Тренажёр для итогового собеседования. Чтение, диалог и монолог с таймерами по демоверсии 2027.</p>
+            <div class="tag" style="background: #2ecc71;">ИТОГОВОЕ СОБЕСЕДОВАНИЕ</div>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

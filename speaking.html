@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Итоговое собеседование 2027 — Тренажёр</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Roboto:wght@400;500;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        line-height: 1.6;
+        padding-bottom: 80px;
+    }
+
+    header {
+        background: #2c3e50;
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+        border-bottom: 5px solid #3498db;
+        position: relative;
+    }
+    header h1 { font-family: 'Merriweather', serif; font-size: 24px; margin-bottom: 10px; }
+    header p { font-size: 14px; opacity: 0.8; }
+
+    .variant-selector {
+        margin-top: 20px;
+        display: inline-block;
+    }
+    .variant-selector select {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        font-family: inherit;
+        cursor: pointer;
+        background: #ecf0f1;
+        color: #2c3e50;
+        font-weight: bold;
+        outline: none;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Навигация по заданиям */
+    .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        background: #fff;
+        border: 2px solid #ddd;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        color: #666;
+        transition: 0.3s;
+        flex: 1;
+        text-align: center;
+    }
+    .tab-btn.active { background: #3498db; border-color: #3498db; color: #fff; }
+    .tab-btn:hover:not(.active) { border-color: #3498db; color: #3498db; }
+
+    /* Секции */
+    .task-section { display: none; animation: fadeIn 0.4s ease; }
+    .task-section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+    }
+
+    /* Таймер */
+    .timer-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #e8f4f8;
+        padding: 15px 25px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 5px solid #3498db;
+    }
+    .timer-display {
+        font-size: 32px;
+        font-weight: 700;
+        color: #2c3e50;
+        font-variant-numeric: tabular-nums;
+    }
+    .timer-btn {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+        transition: 0.2s;
+        min-width: 100px;
+    }
+    .timer-btn:hover { background: #2980b9; }
+    .timer-btn.stop { background: #e74c3c; }
+    .timer-btn.stop:hover { background: #c0392b; }
+
+    /* Текст для чтения */
+    .reading-text {
+        font-family: 'Merriweather', serif;
+        font-size: 18px;
+        line-height: 1.8;
+        text-align: justify;
+        text-indent: 30px;
+        color: #2c3e50;
+        background: #fdfdfd;
+        padding: 20px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+    }
+    .reading-text p { margin-bottom: 15px; }
+
+    /* Вопросы */
+    .question-item {
+        background: #f9f9f9;
+        border-left: 4px solid #e74c3c;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        border-radius: 0 8px 8px 0;
+        font-size: 16px;
+    }
+    .question-item b { color: #e74c3c; }
+
+    /* Темы для монолога */
+    .topic-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .topic-card {
+        background: #fff;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        padding: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .topic-card:hover { border-color: #3498db; box-shadow: 0 4px 12px rgba(52,152,219,0.15); }
+    .topic-card.selected { border-color: #3498db; background: #f0f8ff; }
+    .topic-card h3 { color: #2c3e50; font-size: 18px; margin-bottom: 10px; }
+    .topic-card p { color: #666; font-size: 14px; margin-bottom: 10px; }
+    .topic-image { font-size: 50px; text-align: center; margin-bottom: 15px; }
+
+    /* Кнопка возврата */
+    .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        background: #7f8c8d;
+        color: white;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+    .back-btn:hover { background: #95a5a6; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Итоговое собеседование по русскому языку</h1>
+    <p>Тренажёр по демоверсиям ФИПИ (2027 год)</p>
+    
+    <div class="variant-selector">
+        <select id="variantSelect" onchange="changeVariant()">
+            <option value="0">Вариант 1: Валерий Гергиев (Дирижёр)</option>
+            <option value="1">Вариант 2: Валентина Терешкова (Космонавт)</option>
+            <option value="2">Вариант 3: Жорес Алферов (Учёный)</option>
+        </select>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Навигация -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(1)">Задание 1. Чтение</button>
+        <button class="tab-btn" onclick="switchTab(2)">Задание 2. Диалог</button>
+        <button class="tab-btn" onclick="switchTab(3)">Задание 3. Монолог</button>
+    </div>
+
+    <!-- ЗАДАНИЕ 1 -->
+    <div id="task1" class="task-section active">
+        <div class="card">
+            <h2>Задание 1. Чтение текста вслух</h2>
+            <p id="task1-instruction" style="margin-bottom: 15px; color: #666;"></p>
+            
+            <div class="timer-box">
+                <div>
+                    <div style="font-size: 12px; color: #666; text-transform: uppercase;">Время на подготовку</div>
+                    <div class="timer-display" id="timer1">02:00</div>
+                </div>
+                <button class="timer-btn" id="btn1" onclick="toggleTimer(1)">Старт</button>
+            </div>
+
+            <div class="reading-text" id="reading-text">
+                <!-- Текст вставляется через JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 2 -->
+    <div id="task2" class="task-section">
+        <div class="card">
+            <h2>Задание 2. Беседа по тексту</h2>
+            <p style="margin-bottom: 15px; color: #666;">Ответьте на 5 вопросов по прочитанному тексту. Ответы должны быть развёрнутыми и полными.</p>
+
+            <div class="timer-box">
+                <div>
+                    <div style="font-size: 12px; color: #666; text-transform: uppercase;">Рекомендуемое время на ответ</div>
+                    <div class="timer-display" id="timer2">05:00</div>
+                </div>
+                <button class="timer-btn" id="btn2" onclick="toggleTimer(2)">Старт</button>
+            </div>
+
+            <div id="questions-container">
+                <!-- Вопросы вставляются через JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3 -->
+    <div id="task3" class="task-section">
+        <div class="card">
+            <h2>Задание 3. Монологическое высказывание</h2>
+            <p style="margin-bottom: 15px; color: #666;">Выберите одну из предложенных тем. На подготовку даётся 2 минуты, высказывание должно занимать не более 3 минут и состоять не менее чем из 10 предложений.</p>
+
+            <div class="timer-box">
+                <div>
+                    <div style="font-size: 12px; color: #666; text-transform: uppercase;">Время на подготовку</div>
+                    <div class="timer-display" id="timer3">02:00</div>
+                </div>
+                <button class="timer-btn" id="btn3" onclick="toggleTimer(3)">Старт</button>
+            </div>
+
+            <div class="topic-grid" id="topics-container">
+                <!-- Темы вставляются через JS -->
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-btn">↩ В главное меню</a>
+</div>
+
+<script>
+    // ==========================================
+    // БАЗА ДАННЫХ ВАРИАНТОВ
+    // ==========================================
+    const variants = [
+        {
+            // ВАРИАНТ 1
+            name: "Валерий Гергиев",
+            task1Instruction: "Выразительно прочитайте текст об известном современном дирижёре Валерии Абисаловиче Гергиеве (родился в 1953 году).",
+            text: `<p>Валерий Абисалович Гергиев – известный российский дирижёр. Он вырос в Северной Осетии, с детства увлекался музыкой, обладал уникальным слухом. Ещё будучи студентом консерватории, одарённый музыкант становился победителем престижных конкурсов дирижёров.</p>
+                   <p>Талант этого музыканта восхищает публику. Его дирижёрское искусство характеризуется эмоциональностью и яркой индивидуальностью.</p>
+                   <p>Валерий Гергиев работал с разными симфоническими оркестрами. Более 30 лет он служит бессменным художественным руководителем Мариинского театра в Санкт-Петербурге. Труппа даёт в год более 700 спектаклей, гастролирует по всему миру. Благодаря Гергиеву репертуар театра расширяется, на сцене появляются молодые талантливые исполнители, звучит музыка современных композиторов. Музыкант является учредителем благотворительного фонда, который помогает развитию театра. Валерий Гергиев возглавляет жюри многих музыкальных конкурсов и фестивалей. Заслуги дирижёра отмечены многочисленными наградами.</p>
+                   <p>Валерий Гергиев уверен, что музыка должна объединять людей, пробуждать в них доброту и отзывчивость, готовность помогать друг другу. В 2008 году он выступил с концертом в память о жертвах среди мирного населения в Цхинвале, в 2016 году – в Сирии. Валерий Гергиев дирижировал оркестром на церемониях открытия и закрытия зимней Олимпиады в Сочи в 2014 году. В декабре 2023 года дирижёр был назначен генеральным директором Большого театра в Москве. Искусство Валерия Гергиева востребовано во всём мире.</p>`,
+            questions: [
+                "Где вырос Валерий Абисалович Гергиев?",
+                "Какими чертами характеризуется дирижёрское искусство Гергиева?",
+                "Как изменился репертуар Мариинского театра под руководством Валерия Абисаловича?",
+                "В каких торжественных мероприятиях Валерий Абисалович Гергиев выступал как дирижёр?",
+                "Какой вклад Валерия Абисаловича Гергиева в культуру отражён в словах оперного певца Дмитрия Александровича Хворостовского: «Гергиев – это наша гордость, наше достоинство. Я считаю, он настоящий герой»? Обоснуйте Ваш ответ, приведя пример или примеры из прочитанного текста."
+            ],
+            topics: [
+                { icon: "✈️", title: "Тема 1. Профессиональный выбор (на основе описания фотографии)", text: "Опишите фотографию (на фото — военный лётчик на аэродроме).", help: "Представитель какой профессии запечатлён? Каков его внешний вид? Где он сфотографирован? В чём важность его профессии для общества?" },
+                { icon: "🗿", title: "Тема 2. Памятник, который запомнился (повествование)", text: "Расскажите о памятнике, который вам запомнился.", help: "Что это за памятник, где он расположен? Как он выглядит? При каких обстоятельствах вы его увидели впервые? Почему он запомнился?" },
+                { icon: "🇷🇺", title: "Тема 3. Что значит быть гражданином? (рассуждение)", text: "Порассуждайте на тему «Что значит быть гражданином?».", help: "Что значит Родина для человека? Почему нужно бережно относиться к культурному наследию? Почему важно знать историю своей страны? Как нужно относиться к родной природе?" }
+            ]
+        },
+        {
+            // ВАРИАНТ 2
+            name: "Валентина Терешкова",
+            task1Instruction: "Выразительно прочитайте текст о первой в мире женщине-космонавте Валентине Владимировне Терешковой (родилась в 1937 году).",
+            text: `<p>Валентина Владимировна Терешкова – первая в мире женщина-космонавт. Она родилась в 1937 году в Ярославской области. После школы работала на шинном заводе, а затем заочно училась в техникуме. С детства мечтала о небе, поэтому активно занималась парашютным спортом.</p>
+                   <p>В 1963 году Валентина Терешкова совершила свой легендарный полёт на космическом корабле «Восток-6». Полёт длился почти трое суток. Она стойко перенесла все испытания, доказав, что женщины способны на равных с мужчинами осваивать космическое пространство.</p>
+                   <p>После полёта Терешкова активно занималась общественной и государственной деятельностью. Она является почётным членом многих международных организаций. За свои заслуги Валентина Владимировна была удостоена звания Героя Советского Союза. Её именем названы улицы, школы и даже кратер на Луне. Валентина Терешкова – настоящий символ мужества и целеустремлённости для многих поколений.</p>`,
+            questions: [
+                "Где родилась Валентина Владимировна Терешкова?",
+                "Чем она увлекалась до того, как стала космонавтом?",
+                "На каком космическом корабле и сколько времени длился её полёт?",
+                "Какую высокую награду получила Терешкова за свой подвиг?",
+                "Как вы понимаете слова лётчика-космонавта Алексея Леонова о Валентине Терешковой: «Она всегда была и остаётся для нас примером стойкости и веры в человека»? Обоснуйте свой ответ, опираясь на текст."
+            ],
+            topics: [
+                { icon: "🩺", title: "Тема 1. Профессиональный выбор (на основе описания фотографии)", text: "Опишите фотографию (на фото — врач скорой помощи в машине).", help: "Представитель какой профессии изображён? Как он одет? Что его окружает? Почему эта профессия так важна?" },
+                { icon: "📖", title: "Тема 2. Книга, которая меня впечатлила (повествование)", text: "Расскажите о книге, которая произвела на вас сильное впечатление.", help: "Как называется книга и кто её автор? О чём она? Почему вы решили её прочитать? Какие эмоции она у вас вызвала?" },
+                { icon: "🎯", title: "Тема 3. Важно ли иметь цель в жизни? (рассуждение)", text: "Порассуждайте на тему «Важно ли иметь цель в жизни?».", help: "Что такое цель? Как она помогает человеку? Может ли жизнь без цели быть счастливой? Приведите примеры." }
+            ]
+        },
+        {
+            // ВАРИАНТ 3
+            name: "Жорес Алферов",
+            task1Instruction: "Выразительно прочитайте текст о выдающемся физике, лауреате Нобелевской премии Жоресе Ивановиче Алферове (родился в 1930 году).",
+            text: `<p>Жорес Иванович Алферов – выдающийся советский и российский физик. Он родился в 1930 году в Витебске. Его отец был инженером, поэтому мальчик с детства интересовался техникой. После войны семья переехала в Ленинград, где Жорес поступил в электротехнический институт.</p>
+                   <p>Всю свою жизнь Алферов посвятил изучению полупроводников. Его открытия в этой области привели к созданию лазеров, светодиодов и солнечных батарей. За разработку полупроводниковых гетероструктур в 2000 году ему была вручена Нобелевская премия по физике.</p>
+                   <p>Жорес Алферов не только занимался наукой, но и активно поддерживал образование. Он основал физико-технический лицей для одарённых детей и стал инициатором создания научно-образовательного центра в Санкт-Петербурге. Учёный всегда подчёркивал важность знаний и говорил, что будущее страны зависит от молодёжи. Его именем назван Санкт-Петербургский национальный исследовательский академический университет.</p>`,
+            questions: [
+                "Где родился и в какой институт поступил Жорес Алферов?",
+                "Изучению чего учёный посвятил всю свою жизнь?",
+                "За какую разработку в 2000 году Алферов получил Нобелевскую премию?",
+                "Что учёный сделал для поддержки одарённых детей?",
+                "Раскройте смысл высказывания Жореса Алферова: «Наука должна служить людям, а не наоборот». Приведите примеры из текста, подтверждающие его научный и гражданский подвиг."
+            ],
+            topics: [
+                { icon: "🚒", title: "Тема 1. Профессиональный выбор (на основе описания фотографии)", text: "Опишите фотографию (на фото — пожарный в экипировке).", help: "Кто изображён на фото? Какие детали экипировки бросаются в глаза? Где происходит действие? В чём опасность и важность этой работы?" },
+                { icon: "🏕️", title: "Тема 2. Путешествие, которое запомнилось (повествование)", text: "Расскажите о путешествии или поездке, которая вам запомнилась.", help: "Куда и с кем вы ездили? Что вы там делали? Какие моменты были самыми яркими? Почему эта поездка осталась в памяти?" },
+                { icon: "🤝", title: "Тема 3. Что такое настоящая дружба? (рассуждение)", text: "Порассуждайте на тему «Что такое настоящая дружба?».", help: "Кого можно назвать настоящим другом? Что значит «прийти на помощь»? Может ли дружба пройти проверку временем? Приведите пример." }
+            ]
+        }
+    ];
+
+    // ==========================================
+    // ЛОГИКА ИНТЕРФЕЙСА
+    // ==========================================
+    let currentVariantIndex = 0;
+    const timers = {
+        1: { time: 120, initial: 120, interval: null, running: false },
+        2: { time: 300, initial: 300, interval: null, running: false },
+        3: { time: 120, initial: 120, interval: null, running: false }
+    };
+
+    // Инициализация при загрузке
+    window.onload = () => {
+        renderVariant(0);
+    };
+
+    // Смена варианта
+    function changeVariant() {
+        const select = document.getElementById('variantSelect');
+        currentVariantIndex = parseInt(select.value);
+        
+        // Сбрасываем таймеры
+        for (let i = 1; i <= 3; i++) {
+            if (timers[i].running) toggleTimer(i);
+            timers[i].time = timers[i].initial;
+            updateDisplay(i, timers[i].time);
+        }
+        
+        renderVariant(currentVariantIndex);
+    }
+
+    // Отрисовка контента варианта
+    function renderVariant(index) {
+        const v = variants[index];
+
+        // Задание 1
+        document.getElementById('task1-instruction').textContent = v.task1Instruction;
+        document.getElementById('reading-text').innerHTML = v.text;
+
+        // Задание 2
+        const qContainer = document.getElementById('questions-container');
+        qContainer.innerHTML = '';
+        v.questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.className = i === 4 ? 'question-item' : 'question-item';
+            if (i === 4) {
+                div.style.background = '#fff3cd';
+                div.style.borderLeftColor = '#ffc107';
+                div.innerHTML = `<b>Вопрос 5 (требует подготовки).</b> ${q}`;
+            } else {
+                div.innerHTML = `<b>Вопрос ${i + 1}.</b> ${q}`;
+            }
+            qContainer.appendChild(div);
+        });
+
+        // Задание 3
+        const tContainer = document.getElementById('topics-container');
+        tContainer.innerHTML = '';
+        v.topics.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'topic-card';
+            div.onclick = function() { selectTopic(this); };
+            div.innerHTML = `
+                <div class="topic-image">${t.icon}</div>
+                <h3>${t.title}</h3>
+                <p>${t.text}</p>
+                <p><i>Вопросы в помощь:</i> ${t.help}</p>
+            `;
+            tContainer.appendChild(div);
+        });
+    }
+
+    // Навигация по вкладкам
+    function switchTab(num) {
+        document.querySelectorAll('.task-section').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById('task' + num).classList.add('active');
+        document.querySelectorAll('.tab-btn')[num - 1].classList.add('active');
+    }
+
+    // Выбор темы
+    function selectTopic(el) {
+        document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    // Таймеры
+    function toggleTimer(id) {
+        const t = timers[id];
+        const btn = document.getElementById('btn' + id);
+        const display = document.getElementById('timer' + id);
+
+        if (t.running) {
+            clearInterval(t.interval);
+            t.running = false;
+            btn.textContent = 'Старт';
+            btn.classList.remove('stop');
+        } else {
+            t.running = true;
+            btn.textContent = 'Стоп';
+            btn.classList.add('stop');
+            
+            t.interval = setInterval(() => {
+                t.time--;
+                if (t.time <= 0) {
+                    clearInterval(t.interval);
+                    t.running = false;
+                    btn.textContent = 'Старт';
+                    btn.classList.remove('stop');
+                    display.textContent = "00:00";
+                    alert("Время вышло!");
+                    t.time = t.initial;
+                    updateDisplay(id, t.time);
+                    return;
+                }
+                updateDisplay(id, t.time);
+            }, 1000);
+        }
+    }
+
+    function updateDisplay(id, time) {
+        const m = Math.floor(time / 60).toString().padStart(2, '0');
+        const s = (time % 60).toString().padStart(2, '0');
+        document.getElementById('timer' + id).textContent = `${m}:${s}`;
+    }
+</script>
+<div style="position: fixed; top: 20px; left: 20px; z-index: 999;">
+    <a href="index.html" style="background: #4f6ef7; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-family: sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">↩ На главную</a>
+</div>
+</body>
+</html>
