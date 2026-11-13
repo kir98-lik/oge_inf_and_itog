@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Информатика-Марио: 5 уровней ОГЭ 2026</title>
+<title>Информатика-Марио: 13 уровней ОГЭ</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
@@ -12,14 +12,23 @@
         --block-color: #e52521;
         --block-border: #8b0000;
         --pipe-color: #43b047;
-        --pipe-border: #1b5e20;
         --text-color: #fff;
     }
 
-    body.theme-jungle { --bg-color: #1b3a2a; --block-color: #8b5a2b; --block-border: #4a3015; --pipe-color: #2d6a4f; --pipe-border: #1b4332; }
-    body.theme-cyber { --bg-color: #0a0714; --block-color: #ff4dd2; --block-border: #8a0066; --pipe-color: #4df0ff; --pipe-border: #007a8a; }
-    body.theme-ocean { --bg-color: #051524; --block-color: #22b8cf; --block-border: #0b5b6b; --pipe-color: #7be3ff; --pipe-border: #2b8ca3; }
-    body.theme-volcano { --bg-color: #1a0805; --block-color: #ff7a3d; --block-border: #993d15; --pipe-color: #ffc94d; --pipe-border: #997400; }
+    /* 13 уникальных тем */
+    body.theme-1 { --bg-color: #5c94fc; --block-color: #e52521; --block-border: #8b0000; }
+    body.theme-2 { --bg-color: #1b3a2a; --block-color: #8b5a2b; --block-border: #4a3015; }
+    body.theme-3 { --bg-color: #0a0714; --block-color: #ff4dd2; --block-border: #8a0066; }
+    body.theme-4 { --bg-color: #051524; --block-color: #22b8cf; --block-border: #0b5b6b; }
+    body.theme-5 { --bg-color: #1a0805; --block-color: #ff7a3d; --block-border: #993d15; }
+    body.theme-6 { --bg-color: #e0f7fa; --block-color: #00796b; --block-border: #004d40; }
+    body.theme-7 { --bg-color: #f5e6ca; --block-color: #d84315; --block-border: #bf360c; }
+    body.theme-8 { --bg-color: #1d4b21; --block-color: #8bc34a; --block-border: #33691e; }
+    body.theme-9 { --bg-color: #37474f; --block-color: #ff9800; --block-border: #e65100; }
+    body.theme-10 { --bg-color: #4a148c; --block-color: #9c27b0; --block-border: #4a148c; }
+    body.theme-11 { --bg-color: #212121; --block-color: #9e9e9e; --block-border: #616161; }
+    body.theme-12 { --bg-color: #3e2723; --block-color: #f44336; --block-border: #b71c1c; }
+    body.theme-13 { --bg-color: #000000; --block-color: #ffd700; --block-border: #b8860b; }
 
     * { box-sizing: border-box; user-select: none; }
 
@@ -47,37 +56,35 @@
     @keyframes float { from { transform: translateX(-100px); } to { transform: translateX(100vw); } }
 
     /* Главное меню */
-    #main-menu { position: relative; z-index: 10; text-align: center; background: rgba(0,0,0,0.85); padding: 40px; border: 4px solid #fff; border-radius: 12px; max-width: 800px; width: 90%; box-shadow: 0 10px 0 rgba(0,0,0,0.5); }
-    h1 { font-size: 24px; color: #ffd700; text-shadow: 4px 4px 0 #e52521; margin-bottom: 10px; line-height: 1.4; }
-    .subtitle { font-size: 10px; color: #ccc; margin-bottom: 30px; }
+    #main-menu { position: relative; z-index: 10; text-align: center; background: rgba(0,0,0,0.85); padding: 30px; border: 4px solid #fff; border-radius: 12px; max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto; box-shadow: 0 10px 0 rgba(0,0,0,0.5); }
+    h1 { font-size: 22px; color: #ffd700; text-shadow: 4px 4px 0 #e52521; margin-bottom: 10px; line-height: 1.4; }
+    .subtitle { font-size: 10px; color: #ccc; margin-bottom: 20px; }
     
-    .levels-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    @media(max-width: 600px) { .levels-grid { grid-template-columns: 1fr; } }
-
-    .level-btn { background: var(--block-color); color: #fff; border: 4px solid #fff; padding: 15px; font-family: inherit; font-size: 12px; cursor: pointer; border-radius: 8px; box-shadow: 0 6px 0 var(--block-border); transition: transform 0.1s, box-shadow 0.1s; text-align: left; }
+    .levels-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+    
+    .level-btn { background: var(--block-color); color: #fff; border: 4px solid #fff; padding: 15px; font-family: inherit; font-size: 10px; cursor: pointer; border-radius: 8px; box-shadow: 0 6px 0 var(--block-border); transition: transform 0.1s, box-shadow 0.1s; text-align: left; display: flex; flex-direction: column; justify-content: space-between; }
     .level-btn:hover { transform: translateY(-2px); }
     .level-btn:active { transform: translateY(6px); box-shadow: 0 0 0 var(--block-border); }
-    .level-btn small { display: block; font-size: 8px; margin-top: 8px; color: #ffd700; }
+    .level-btn span { font-size: 8px; margin-top: 8px; color: #ffd700; }
 
     /* Игровой экран */
     #game-screen { display: none; width: 100%; height: 100%; position: relative; z-index: 10; flex-direction: column; }
     
-    .hud { display: flex; justify-content: space-between; padding: 15px 20px; background: #000; border-bottom: 4px solid #fff; font-size: 10px; z-index: 20; flex-wrap: wrap; gap: 10px; }
+    .hud { display: flex; justify-content: space-between; padding: 15px 20px; background: #000; border-bottom: 4px solid #fff; font-size: 10px; z-index: 20; flex-wrap: wrap; gap: 10px; align-items: center; }
     .hud span { color: #ffd700; }
     .hud .timer { color: #ff8c00; }
 
-    .question-container { margin: 20px auto; background: #fff; color: #000; padding: 20px; border: 4px solid #000; border-radius: 8px; width: 90%; max-width: 800px; font-size: 12px; line-height: 1.6; text-align: center; box-shadow: inset -4px -4px 0 #ccc; white-space: pre-wrap; z-index: 20; transition: background 0.3s; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: rgba(0,0,0,0.5); }
+    .back-to-hub { background: #e52521; color: #fff; text-decoration: none; padding: 8px 15px; border: 3px solid #fff; border-radius: 6px; font-size: 10px; box-shadow: 0 4px 0 #8b0000; transition: 0.1s; display: inline-block; }
+    .back-to-hub:active { transform: translateY(4px); box-shadow: none; }
+
+    .question-container { margin: 10px auto; background: #fff; color: #000; padding: 15px; border: 4px solid #000; border-radius: 8px; width: 95%; max-width: 800px; font-size: 10px; line-height: 1.6; text-align: center; box-shadow: inset -4px -4px 0 #ccc; white-space: pre-wrap; z-index: 20; min-height: 80px; display: flex; flex-direction: column; justify-content: center; }
 
     /* Игровое поле (Платформер) */
     .play-area { flex: 1; position: relative; overflow: hidden; border-bottom: 8px solid #c84c0c; background: rgba(0,0,0,0.2); }
-    .block-row { position: absolute; bottom: 180px; width: 100%; display: flex; justify-content: center; gap: 40px; }
+    .block-row { position: absolute; bottom: 180px; width: 100%; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding: 0 10px; }
     .block-row.shake { animation: rowShake 0.5s ease; }
-
-    @keyframes rowShake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-10px); }
-        75% { transform: translateX(10px); }
-    }
+    @keyframes rowShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
 
     .q-block { width: 80px; height: 80px; background: var(--block-color); border: 4px solid #fff; border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 10px; text-align: center; color: #fff; cursor: pointer; box-shadow: inset -6px -6px 0 rgba(0,0,0,0.3), 0 6px 0 var(--block-border); transition: transform 0.1s; padding: 5px; word-break: break-all; position: relative; }
     .q-block::before { content: '❓'; position: absolute; font-size: 20px; opacity: 0.3; }
@@ -86,15 +93,15 @@
     .mario { position: absolute; bottom: 0; left: 50px; width: 50px; height: 50px; font-size: 50px; display: flex; justify-content: center; align-items: flex-end; z-index: 10; }
 
     /* Модальные окна */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; }
     .modal-overlay.active { display: flex; animation: fadeIn 0.3s; }
     
-    .modal-content { background: #fff; color: #000; border: 6px solid #000; border-radius: 12px; padding: 30px; max-width: 600px; width: 100%; text-align: center; box-shadow: 10px 10px 0 rgba(0,0,0,0.5); }
-    .modal-content h2 { font-size: 16px; color: #e52521; margin-top: 0; line-height: 1.4; }
+    .modal-content { background: #fff; color: #000; border: 6px solid #000; border-radius: 12px; padding: 25px; max-width: 600px; width: 100%; text-align: center; box-shadow: 10px 10px 0 rgba(0,0,0,0.5); }
+    .modal-content h2 { font-size: 14px; color: #e52521; margin-top: 0; line-height: 1.4; }
     .modal-content p { font-size: 10px; line-height: 1.6; margin-bottom: 20px; }
-    .modal-content .emoji-big { font-size: 60px; display: block; margin: 20px 0; }
+    .modal-content .emoji-big { font-size: 50px; display: block; margin: 15px 0; }
     
-    .continue-btn { background: #5c94fc; color: #fff; border: 4px solid #000; padding: 12px 24px; font-family: inherit; font-size: 12px; cursor: pointer; border-radius: 6px; box-shadow: 0 4px 0 #000; }
+    .continue-btn { background: #5c94fc; color: #fff; border: 4px solid #000; padding: 12px 24px; font-family: inherit; font-size: 10px; cursor: pointer; border-radius: 6px; box-shadow: 0 4px 0 #000; }
     .continue-btn:active { transform: translateY(4px); box-shadow: none; }
 
     /* Контейнер для видео и ссылок */
@@ -102,37 +109,13 @@
     #modalMedia.active { display: block; animation: fadeIn 0.5s; }
     #modalMedia iframe { width: 100%; aspect-ratio: 16/9; border: 4px solid #000; border-radius: 8px; }
     
-    .media-link-btn { display: inline-block; background: #ff8c00; color: #fff; text-decoration: none; padding: 15px 30px; border: 4px solid #000; border-radius: 8px; font-size: 12px; font-weight: bold; box-shadow: 0 4px 0 #993d15; transition: transform 0.1s; }
+    .media-link-btn { display: inline-block; background: #ff8c00; color: #fff; text-decoration: none; padding: 12px 24px; border: 4px solid #000; border-radius: 8px; font-size: 10px; font-weight: bold; box-shadow: 0 4px 0 #993d15; transition: transform 0.1s; }
     .media-link-btn:active { transform: translateY(4px); box-shadow: none; }
 
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    /* Кнопка возврата к тренажёру */
-    .back-btn {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #e52521;
-        color: #fff;
-        text-decoration: none;
-        padding: 12px 24px;
-        font-size: 12px;
-        border: 4px solid #fff;
-        border-radius: 8px;
-        box-shadow: 0 6px 0 #8b0000;
-        font-family: 'Press Start 2P', monospace;
-        z-index: 999;
-        transition: transform 0.1s, box-shadow 0.1s;
-        text-align: center;
-        white-space: nowrap;
-    }
-    .back-btn:hover { transform: translateX(-50%) translateY(-2px); }
-    .back-btn:active { transform: translateX(-50%) translateY(6px); box-shadow: none; }
-    @media(max-width: 600px) { .back-btn { font-size: 10px; padding: 10px 15px; bottom: 10px; } }
 </style>
 </head>
-<body class="theme-space">
+<body class="theme-1">
 
     <div class="cloud c1"></div>
     <div class="cloud c2"></div>
@@ -141,24 +124,23 @@
     <!-- ГЛАВНОЕ МЕНЮ -->
     <div id="main-menu">
         <h1>ИНФОРМАТИКА-МАРИО</h1>
-        <div class="subtitle">Выбери уровень сложности. 16 заданий по спецификации ОГЭ 2026. Прыгай на блоки!</div>
-        <div class="levels-grid">
-            <button class="level-btn" onclick="startGame(0)">🍄 МИР 1: КОСМОС <small>Базовый (10 задач)</small></button>
-            <button class="level-btn" onclick="startGame(1)">🌿 МИР 2: ДЖУНГЛИ <small>Средний (10 задач)</small></button>
-            <button class="level-btn" onclick="startGame(2)">⚡ МИР 3: КИБЕРПАНК <small>Продвинутый (10 задач)</small></button>
-            <button class="level-btn" onclick="startGame(3)">🌊 МИР 4: ОКЕАН <small>ОГЭ-уровень (10 задач)</small></button>
-            <button class="level-btn" onclick="startGame(4)">🌋 МИР 5: ВУЛКАН <small>Хардкор (10 задач)</small></button>
+        <div class="subtitle">13 уровней сложности. Прыгай на блоки, чтобы ответить!</div>
+        <div class="levels-grid" id="levels-grid">
+            <!-- Генерируется через JS -->
         </div>
-        <div class="subtitle" style="margin-top: 20px;">
-            Управление: ⬅️ ➡️ двигаться, ⬆️ или ПРОБЕЛ прыгать.<br>Или просто кликни на нужный блок!
+        <div style="margin-top: 20px;">
+            <a href="index.html" class="back-to-hub">↩ ВЕРНУТЬСЯ В ХАБ (ГЛАВНОЕ МЕНЮ)</a>
         </div>
     </div>
 
     <!-- ИГРОВОЙ ЭКРАН -->
     <div id="game-screen">
+        <div class="top-bar">
+            <a href="index.html" class="back-to-hub">↩ В ХАБ</a>
+        </div>
         <div class="hud">
             <div>МОНЕТЫ: <span id="scoreDisplay">0</span></div>
-            <div>МИР: <span id="levelDisplay">1</span></div>
+            <div>УРОВЕНЬ: <span id="levelDisplay">1</span></div>
             <div>ЗАДАНИЕ: <span id="qProgress">1/16</span></div>
             <div>ЖИЗНИ: <span id="livesDisplay">❤️❤️❤️</span></div>
             <div class="timer">⏱️ ДО ПЕРЕМЕШИВАНИЯ: <span id="shuffleTimerDisplay">8:00</span></div>
@@ -183,168 +165,297 @@
 
 <script>
 /* =========================================================
-   НАСТРОЙКИ МЕДИА-БОНУСОВ (Больше видео и ссылок!)
+   НАСТРОЙКИ МЕДИА-БОНУСОВ (ДЕТСКИЕ ПЕСНИ И СТРАШНЫЕ ВИДЕО VK)
    ========================================================= */
 const MEDIA_REWARDS = [
-    { type: 'video', url: 'https://vk.com/video_ext.php?oid=-228364761&id=456239244&hash=...', title: 'МУЗЫКАЛЬНАЯ ПАУЗА', text: 'Отвлекись на минутку и подпевай!' },
-    { type: 'video', url: 'https://vk.com/video_ext.php?oid=-175112007&id=456243343&hash=...', title: 'Lofi для учёбы', text: 'Расслабься под спокойную музыку.' },
-    { type: 'video', url: 'https://vkvideo.ru/video-240740412_456239075', title: 'Lofi Hip Hop', text: 'Идеальный фон для подготовки к ОГЭ.' },
-    { type: 'link', url: 'https://yablyk.com/972197-75-interesnyx-faktov-ob-it-texnologiyax/', title: 'БОНУСНАЯ ССЫЛКА', text: 'Узнай что-то новое про IT!', btnText: 'Открыть факты' },
-    { type: 'link', url: 'https://ru.pinterest.com/ideas/милые-фотки-котиков/914111053343/', title: 'ПОРЦИЯ МИЛОТЫ', text: 'Посмотри на котиков, чтобы снять стресс.', btnText: 'Смотреть котиков' },
-    { type: 'video', url: 'https://vkvideo.ru/video-216453373_456239070', title: 'МУЗЫКАЛЬНАЯ ПАУЗА', text: 'Улыбнись!' },
-    { type: 'video', url: 'https://vkvideo.ru/video-184680412_456282943', title: 'ТАНЦЕВАЛЬНАЯ ПАУЗА', text: 'Немного движения для разгона крови!' },
+    // 4 детских песенных видео
+    { type: 'video', url: 'https://vkvideo.ru/video-228364761_456239244', title: 'ДЕТСКАЯ ПЕСЕНКА', text: ' подпевай!', btnText: 'Смотреть в VK' },
+    { type: 'video', url: 'https://vkvideo.ru/video-230008722_456239137', title: 'ПЕСНЯ', text: 'трогательный клип.', btnText: 'Смотреть в VK' },
+    { type: 'video', url: 'https://vkvideo.ru/playlist/-232169749_1', title: 'ВЕСЁЛЫЙ МУЛЬТИК', text: 'песенка про дружбу.', btnText: 'Смотреть в VK' },
+    { type: 'video', url: 'https://vkvideo.ru/video-226915248_456239055', title: 'ДОБРАЯ ПЕСНЯ', text: '«легендарная песня.', btnText: 'Смотреть в VK' },
+    
+    // 4 страшных видео (скримеры)
+    { type: 'video', url: 'https://vkvideo.ru/video-7602844_157234365', title: 'ДЕТСКАЯ ПЕСЕНКА', text: '«Clowns will eat Bart» — не для слабонервных.', btnText: 'Смотреть в VK (Осторожно!)' },
+    { type: 'video', url: 'https://vkvideo.ru/video-226695729_456256942', title: 'ДЕТСКАЯ ПЕСЕНКА', text: 'Внезапный испуг. Будь готов!', btnText: 'Смотреть в VK (Осторожно!)' },
+    { type: 'video', url: 'https://vkvideo.ru/video-98255903_456239077', title: 'ДЕТСКАЯ ПЕСЕНКА', text: 'Странные звуки и неожиданный конец.', btnText: 'Смотреть в VK (Осторожно!)' },
+    { type: 'video', url: 'https://vkvideo.ru/video-116325317_456239021', title: 'ДЕТСКАЯ ПЕСЕНКА', text: 'Проверь свою нервную систему!', btnText: 'Смотреть в VK (Осторожно!)' },
 ];
 
 /* =========================================================
-   БАЗА ШТРАФНЫХ ВОПРОСОВ (24 задания по типам ОГЭ)
+   БАЗА ШТРАФНЫХ ВОПРОСОВ
    ========================================================= */
 const PENALTY_QUESTIONS = [
-    { q: "В кодировке Unicode каждый символ кодируется 16 битами. Вова написал текст: «Лев, еж, слон, олень, тюлень». Ученик удалил название одного животного, а также лишнюю запятую и пробел. Размер текста уменьшился на 12 байт. Название какого животного удалили?", opts: ["Лев", "Еж", "Слон", "Тюлень"], a: 2 },
-    { q: "Разведчик передал радиограмму: •—•• ••• —. Известно, что использовались только буквы: А(•—), Д(•••), Ж(•—••), Л(—). Определите текст радиограммы.", opts: ["ЖДА", "ЖАЛ", "ДЖА", "АЖД"], a: 0 },
-    { q: "Напишите наименьшее натуральное число x, для которого ЛОЖНО высказывание: (x > 3) ИЛИ НЕ ((x < 4) И (x > 2))", opts: ["2", "3", "4", "5"], a: 1 },
-    { q: "Между пунктами A, B, C, D построены дороги: A–B=2, A–C=4, A–D=6, B–C=1, C–D=3. Найдите длину кратчайшего пути из A в D.", opts: ["5", "6", "7", "8"], a: 0 },
-    { q: "У исполнителя Вычислитель две команды: 1. умножь на 3; 2. прибавь 2. Составьте алгоритм получения из числа 3 числа 37 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 },
-    { q: "Программа: если (s > 10) или (t > A), то YES, иначе NO. Пары: (5,2), (15,2), (5,12), (15,12), (10,5). Найдите A, при котором YES ровно 3 раза.", opts: ["8", "10", "12", "15"], a: 1 },
-    { q: "Доступ к файлу com.xls на сервере tt.com по протоколу http. Фрагменты: 1) com 2) xls 3) com. 4) http 5) tt. 6) / 7) ://. Запишите последовательность цифр.", opts: ["4751632", "4756132", "4715632", "4751623"], a: 0 },
-    { q: "В таблице приведены запросы: Диана & (Аврора | Паллада) — 800; Диана & Аврора & Паллада — 220; Диана & Аврора — 550. Найдите количество страниц по запросу «Диана & Паллада».", opts: ["430", "470", "500", "530"], a: 1 },
-    { q: "Сколько существует различных путей из A в G? Дороги: A→B, A→D, B→C, B→E, C→E, C→G, D→E, D→F, E→G, E→F, F→G.", opts: ["8", "10", "12", "14"], a: 1 },
-    { q: "Среди чисел 100000₂, 45₁₀, 53₈ найдите наименьшее и запишите его в десятичной системе.", opts: ["32", "45", "43", "53"], a: 0 },
-    { q: "Файл 4 Кбайт передаётся со скоростью 1024 бит/с. Сколько секунд займёт передача?", opts: ["16", "24", "32", "48"], a: 2 },
-    { q: "Слово «Привет» (6 букв) в 16-битной кодировке. Сколько байт оно занимает?", opts: ["6", "12", "16", "24"], a: 1 },
-    { q: "Для какого X истинно: НЕ (X < 6) И (X < 7)", opts: ["5", "6", "7", "8"], a: 1 },
-    { q: "Между пунктами A, B, C, D, E дороги: A–B=2, B–D=3, A–C=5, C–D=1, D–E=4. Кратчайший путь A→E?", opts: ["7", "8", "9", "10"], a: 2 },
-    { q: "У исполнителя две команды: 1. умножь на 3; 2. прибавь 2. Получите из 2 число 28 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 },
-    { q: "Программа: если (s < 10) и (t > A), то YES. Пары: (1,2), (11,2), (1,12), (11,12), (5,5). Найдите A, при котором YES ровно 2 раза.", opts: ["1", "3", "5", "7"], a: 1 },
-    { q: "Сколько бит в 1/4 Кбайта?", opts: ["1024", "2048", "4096", "8192"], a: 1 },
-    { q: "Какой минимальный объём памяти (в битах) нужен для хранения 20 различных цветов?", opts: ["4", "5", "6", "8"], a: 1 },
-    { q: "Чему равно НЕ (A ИЛИ B)?", opts: ["НЕ A И НЕ B", "НЕ A ИЛИ НЕ B", "A И B", "A ИЛИ B"], a: 0 },
-    { q: "В URL http://test.ru/file.txt что является файлом?", opts: ["http", "test.ru", "file.txt", "/"], a: 2 },
-    { q: "Сколько Кбайт в 2048 байтах?", opts: ["1", "2", "4", "8"], a: 1 },
-    { q: "Переведи 111111₂ в десятичную систему счисления.", opts: ["31", "63", "127", "255"], a: 1 },
-    { q: "В корзине 16 шаров. Сколько бит информации несёт сообщение о том, что достали один шар?", opts: ["2", "4", "8", "16"], a: 1 },
-    { q: "Слово «Тест» в 16-битной кодировке. Сколько байт?", opts: ["4", "8", "12", "16"], a: 1 }
+    { q: "Сколько бит в 0.5 Кбайтах?", opts: ["4096", "512", "1024", "2048"], a: 0 },
+    { q: "Переведи 1110₂ в десятичную.", opts: ["12", "14", "16", "10"], a: 1 },
+    { q: "Какое логическое выражение равносильно НЕ (A И B)?", opts: ["НЕ A И НЕ B", "НЕ A ИЛИ НЕ B", "A ИЛИ B", "A И B"], a: 1 },
+    { q: "Файл 1 Мбайт. Скорость 1 Мбит/с. Сколько секунд?", opts: ["1", "8", "10", "16"], a: 1 },
+    { q: "Какой минимальный бит нужен для кодирования 5 цветов?", opts: ["2", "3", "4", "5"], a: 1 },
+    { q: "s := 0\nдля i от 1 до 4\n  s := s + 2\nЧему равно s?", opts: ["6", "8", "10", "12"], a: 1 },
+    { q: "Путь A-B=3, B-C=4, A-C=8, C-D=2.\nПуть A→D?", opts: ["8", "9", "10", "11"], a: 1 },
+    { q: "Слово «Экзамен» в 8-битной кодировке.\nСколько байт?", opts: ["6", "7", "8", "9"], a: 1 },
+    { q: "Переведи 20₁₀ в двоичную.", opts: ["10100", "10010", "11000", "11100"], a: 0 },
+    { q: "Сколько Кбайт в 1/4 Мбайта?", opts: ["256", "512", "1024", "2048"], a: 0 },
+    { q: "Маша&(Оля|Катя)=100\nМаша&Оля&Катя=20\nМаша&Оля=60\nНайди Маша&Катя.", opts: ["40", "50", "60", "80"], a: 2 },
+    { q: "В корзине 16 шаров. Сколько бит на 1 шар?", opts: ["2", "4", "8", "16"], a: 1 },
+    { q: "s := 1\nдля i от 1 до 3\n  s := s * 3\nЧему равно s?", opts: ["9", "18", "27", "81"], a: 2 },
+    { q: "Переведи 1001₂ в десятичную.", opts: ["7", "8", "9", "10"], a: 2 },
+    { q: "Для какого X ложно:\n(X > 2) И (X < 5)", opts: ["3", "4", "5", "6"], a: 3 },
+    { q: "Файл 2 Мбайта. Скорость 4 Мбит/с.\nСколько секунд?", opts: ["2", "4", "8", "16"], a: 1 },
+    { q: "Сколько байт в 16 битах?", opts: ["1", "2", "4", "8"], a: 1 },
+    { q: "s := 0\nдля i от 1 до 5\n  s := s + i\nЧему равно s?", opts: ["10", "15", "20", "25"], a: 1 },
+    { q: "В URL http://test.ru/file.txt\nчто является файлом?", opts: ["http", "test.ru", "file.txt", "/"], a: 2 },
+    { q: "Чему равно НЕ (A ИЛИ B) И A?", opts: ["A", "B", "0", "1"], a: 2 },
+    { q: "Переведи 64₁₀ в двоичную.", opts: ["1000000", "100000", "1100000", "10000000"], a: 0 },
+    { q: "Сколько бит в 2 Кбайтах?", opts: ["1024", "2048", "16384", "8192"], a: 2 },
+    { q: "Путь A-B=2, B-C=3, A-C=7, C-D=1.\nПуть A→D?", opts: ["6", "7", "8", "9"], a: 0 },
+    { q: "Слово «Тест» в 16-битной кодировке.\nСколько байт?", opts: ["4", "8", "12", "16"], a: 1 }
 ];
 
 let penaltyPool = [];
-
-function initPenaltyPool() {
-    penaltyPool = [...PENALTY_QUESTIONS].sort(() => Math.random() - 0.5);
-}
-
+function initPenaltyPool() { penaltyPool = [...PENALTY_QUESTIONS].sort(() => Math.random() - 0.5); }
 function getNextPenaltyQuestion() {
     if (penaltyPool.length === 0) initPenaltyPool();
     return penaltyPool.pop();
 }
 
 /* =========================================================
-   БАЗА ОСНОВНЫХ ВОПРОСОВ (5 УРОВНЕЙ ПО 16 ЗАДАНИЙ, СТРОГО ПО ОГЭ)
+   БАЗА ОСНОВНЫХ ВОПРОСОВ (13 УРОВНЕЙ)
    ========================================================= */
 const LEVELS = [
-    { 
-        theme: "theme-space", name: "Космос", 
-        questions: [ 
-            { q: "В кодировке Unicode каждый символ кодируется 16 битами. Вова написал текст: «Школьные предметы: ОБЖ, химия, физика, алгебра, биология, география, литература, информатика». Ученик удалил название одного предмета, а также лишние запятую и пробел. Размер предложения уменьшился на 16 байт. Напишите вычеркнутое название.", opts: ["физика", "химия", "биология", "география"], a: 0 }, 
-            { q: "Для какого из приведённых значений числа X истинно высказывание: НЕ (X < 6) И (X < 7)", opts: ["5", "6", "7", "8"], a: 1 }, 
-            { q: "Между населёнными пунктами A, B, C, D, E построены дороги: A–B=2, A–C=3, B–C=1, B–D=4, C–D=2, C–E=5, D–E=1. Определите длину кратчайшего пути между пунктами A и E.", opts: ["6", "7", "8", "9"], a: 0 }, 
-            { q: "У исполнителя Вычислитель две команды: 1. умножь на 3; 2. прибавь 2. Составьте алгоритм получения из числа 3 числа 37, содержащий не более 5 команд. В ответе запишите только номера команд.", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "В языке запросов поискового сервера для обозначения «ИЛИ» используется символ «|», для «И» — символ «&». В таблице приведены запросы: Диана & (Аврора | Паллада) — 800; Диана & Аврора & Паллада — 220; Диана & Аврора — 550. Укажите количество страниц по запросу: Диана & Паллада.", opts: ["430", "470", "500", "530"], a: 1 }, 
-            { q: "Переведите число 100000 из двоичной системы счисления в десятичную.", opts: ["16", "32", "64", "128"], a: 1 }, 
-            { q: "В кодировке Unicode каждый символ кодируется 16 битами. Вова написал текст: «Фрукты: яблоки, груши, сливы, вишни, абрикосы». Ученик удалил название одного фрукта, а также лишние запятую и пробел. Размер уменьшился на 16 байт. Напишите вычеркнутое название.", opts: ["яблоки", "груши", "сливы", "вишни"], a: 0 }, 
-            { q: "Напишите наименьшее натуральное число x, для которого истинно высказывание: НЕ (x < 5) И (x < 7)", opts: ["4", "5", "6", "7"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E построены дороги: A–B=1, A–C=4, B–C=2, B–D=5, C–D=1, C–E=3, D–E=2. Определите длину кратчайшего пути между A и E.", opts: ["5", "6", "7", "8"], a: 1 }, 
-            { q: "У исполнителя две команды: 1. умножь на 3; 2. прибавь 2. Составьте алгоритм получения из числа 2 числа 28, содержащий не более 5 команд.", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: ввод s, t, A. Если (s > 5) или (t < A), то вывод «YES», иначе «NO». Пары: (1,2), (6,2), (1,7), (6,7), (-1,-2). Укажите целое значение A, при котором программа напечатает «YES» ровно 3 раза.", opts: ["1", "2", "3", "4"], a: 1 }, 
-            { q: "Доступ к файлу com.xls на сервере tt.com осуществляется по протоколу http. Фрагменты: 1) com 2) xls 3) com. 4) http 5) tt. 6) / 7) ://. Запишите последовательность цифр.", opts: ["4751632", "4756132", "4715632", "4751623"], a: 0 }, 
-            { q: "В кодировке Unicode каждый символ кодируется 16 битами. Текст: «Фрукты: персик, груша, слива, вишня, абрикос». Удалили название одного фрукта, а также лишние запятую и пробел. Размер уменьшился на 16 байт. Напишите вычеркнутое название.", opts: ["персик", "груша", "слива", "вишня"], a: 0 }, 
-            { q: "Напишите наименьшее натуральное число x, для которого ложно высказывание: (x > 10) И НЕ (x > 15)", opts: ["11", "15", "16", "20"], a: 2 }, 
-            { q: "Дороги: A–B = 3, A–C = 2, B–C = 1, B–D = 4, C–D = 2, C–E = 5, D–E = 1. Найдите длину кратчайшего пути из A в E.", opts: ["4", "5", "6", "7"], a: 1 }, 
-            { q: "У исполнителя две команды: 1. умножь на 3; 2. прибавь 1. Составьте алгоритм получения из 1 числа 20, содержащий не более 5 команд.", opts: ["21122", "12122", "22112", "11221"], a: 0 } 
-        ] 
-    },
-    { 
-        theme: "theme-jungle", name: "Джунгли", 
-        questions: [ 
-            { q: "В кодировке Unicode каждый символ кодируется 16 битами. Вова написал текст: «Мои любимые герои мультфильмов: Шрек, Пумба, Маугли, Рататуй, Пиноккио». Ученик удалил имя героя, а также лишние запятую и пробел. Размер уменьшился на 12 байт. Напишите удалённое имя.", opts: ["Шрек", "Пумба", "Маугли", "Пиноккио"], a: 0 }, 
-            { q: "Разведчик передал радиограмму: •—•• ••• —. Известно, что использовались только буквы: А(•—), Д(•••), Ж(•—••), Л(—). Определите текст радиограммы.", opts: ["ЖДА", "ЖАЛ", "ДЖА", "АЖД"], a: 0 }, 
-            { q: "Напишите наименьшее натуральное число x, для которого ЛОЖНО высказывание: (x > 3) ИЛИ НЕ ((x < 4) И (x > 2))", opts: ["2", "3", "4", "5"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E дороги: A–B=2, A–C=4, A–D=6, B–C=1, C–D=3. Найдите длину кратчайшего пути из A в D.", opts: ["5", "6", "7", "8"], a: 1 }, 
-            { q: "У исполнителя Вычислитель две команды: 1. умножь на 3; 2. прибавь 2. Составьте алгоритм получения из числа 3 числа 69 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: если (s > 10) или (t > A), то YES, иначе NO. Пары: (5,2), (15,2), (5,12), (15,12), (10,5). Найдите A, при котором YES ровно 3 раза.", opts: ["8", "10", "12", "15"], a: 1 }, 
-            { q: "Доступ к файлу rus.doc на сервере obr.org по протоколу https. Фрагменты: 1) doc 2) rus 3) org 4) https 5) obr 6) / 7) :// 8) .. Запишите последовательность цифр.", opts: ["475836172", "475863172", "475836712", "475836127"], a: 0 }, 
-            { q: "В таблице приведены запросы: Диана & (Аврора | Паллада) — 800; Диана & Аврора & Паллада — 220; Диана & Аврора — 550. Найдите количество страниц по запросу «Диана & Паллада».", opts: ["430", "470", "500", "530"], a: 1 }, 
-            { q: "Сколько существует различных путей из A в G? Дороги: A→B, A→D, B→C, B→E, C→E, C→G, D→E, D→F, E→G, E→F, F→G.", opts: ["8", "10", "12", "14"], a: 1 }, 
-            { q: "Среди чисел 100000₂, 45₁₀, 53₈ найдите наименьшее и запишите его в десятичной системе.", opts: ["32", "45", "43", "53"], a: 0 }, 
-            { q: "Файл 4 Кбайт передаётся со скоростью 1024 бит/с. Сколько секунд займёт передача?", opts: ["16", "24", "32", "48"], a: 2 }, 
-            { q: "Слово «Привет» (6 букв) в 16-битной кодировке. Сколько байт оно занимает?", opts: ["6", "12", "16", "24"], a: 1 }, 
-            { q: "Для какого X истинно: НЕ (X < 6) И (X < 7)", opts: ["5", "6", "7", "8"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E дороги: A–B=2, B–D=3, A–C=5, C–D=1, D–E=4. Кратчайший путь A→E?", opts: ["7", "8", "9", "10"], a: 2 }, 
-            { q: "У исполнителя две команды: 1. умножь на 3; 2. прибавь 2. Получите из 2 число 28 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: если (s < 10) и (t > A), то YES. Пары: (1,2), (11,2), (1,12), (11,12), (5,5). Найдите A, при котором YES ровно 2 раза.", opts: ["1", "3", "5", "7"], a: 1 } 
-        ] 
-    },
-    { 
-        theme: "theme-cyber", name: "Киберпанк", 
-        questions: [ 
-            { q: "В кодировке Unicode каждый символ кодируется 16 битами. Вова написал текст: «Мои любимые герои мультфильмов: Шрек, Пумба, Маугли, Рататуй, Пиноккио, Винни-Пух, Белоснежка, Малефисента, Человек-паук, Конек-Горбунок». Ученик удалил имя героя, а также лишние запятую и пробел. Размер нового предложения оказался на 12 байт меньше. Напишите удалённое имя.", opts: ["Шрек", "Пумба", "Маугли", "Пиноккио"], a: 0 }, 
-            { q: "Разведчик передал радиограмму: •—•• ••• —. Известно, что использовались только буквы: А(•—), Д(•••), Ж(•—••), Л(—). Определите текст радиограммы.", opts: ["ЖДА", "ЖАЛ", "ДЖА", "АЖД"], a: 0 }, 
-            { q: "Напишите наименьшее натуральное число x, для которого ЛОЖНО высказывание: (x > 3) ИЛИ НЕ ((x < 4) И (x > 2))", opts: ["2", "3", "4", "5"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E дороги: A–B=2, A–C=4, A–D=6, B–C=1, C–D=3. Найдите длину кратчайшего пути из A в D.", opts: ["5", "6", "7", "8"], a: 0 }, 
-            { q: "У исполнителя Вычислитель две команды: 1. умножь на 3; 2. прибавь 2. Составьте алгоритм получения из числа 3 числа 69 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: если (s > 10) или (t > A), то YES, иначе NO. Пары: (5,2), (15,2), (5,12), (15,12), (10,5). Найдите A, при котором YES ровно 3 раза.", opts: ["8", "10", "12", "15"], a: 1 }, 
-            { q: "Доступ к файлу rus.doc на сервере obr.org по протоколу https. Фрагменты: 1) doc 2) rus 3) org 4) https 5) obr 6) / 7) :// 8) .. Запишите последовательность цифр.", opts: ["475836172", "475863172", "475836712", "475836127"], a: 0 }, 
-            { q: "В таблице приведены запросы: Диана & (Аврора | Паллада) — 800; Диана & Аврора & Паллада — 220; Диана & Аврора — 550. Найдите количество страниц по запросу «Диана & Паллада».", opts: ["430", "470", "500", "530"], a: 1 }, 
-            { q: "Сколько существует различных путей из A в G? Дороги: A→B, A→D, B→C, B→E, C→E, C→G, D→E, D→F, E→G, E→F, F→G.", opts: ["8", "10", "12", "14"], a: 1 }, 
-            { q: "Среди чисел 100000₂, 45₁₀, 53₈ найдите наименьшее и запишите его в десятичной системе.", opts: ["32", "45", "43", "53"], a: 0 }, 
-            { q: "Файл 4 Кбайт передаётся со скоростью 1024 бит/с. Сколько секунд займёт передача?", opts: ["16", "24", "32", "48"], a: 2 }, 
-            { q: "Слово «Привет» (6 букв) в 16-битной кодировке. Сколько байт оно занимает?", opts: ["6", "12", "16", "24"], a: 1 }, 
-            { q: "Для какого X истинно: НЕ (X < 6) И (X < 7)", opts: ["5", "6", "7", "8"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E дороги: A–B=2, B–D=3, A–C=5, C–D=1, D–E=4. Кратчайший путь A→E?", opts: ["7", "8", "9", "10"], a: 2 }, 
-            { q: "У исполнителя две команды: 1. умножь на 3; 2. прибавь 2. Получите из 2 число 28 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: если (s < 10) и (t > A), то YES. Пары: (1,2), (11,2), (1,12), (11,12), (5,5). Найдите A, при котором YES ровно 2 раза.", opts: ["1", "3", "5", "7"], a: 1 } 
-        ] 
-    },
-    { 
-        theme: "theme-ocean", name: "Океан", 
-        questions: [ 
-            { q: "В кодировке Unicode каждый символ кодируется 16 битами. Ученик написал текст: «Скользя по утреннему снегу, Друг милый, предадимся бегу...». Ученик удалил одно слово, а также лишнюю запятую и пробел. Размер текста уменьшился на 16 байт. Напишите удалённое слово.", opts: ["утреннему", "милый", "снегу", "бегу"], a: 1 }, 
-            { q: "Разведчик передал радиограмму: •—•• ••• —. Известно, что использовались только буквы: А(•—), Д(•••), Ж(•—••), Л(—). Определите текст радиограммы.", opts: ["ЖДА", "ЖАЛ", "ДЖА", "АЖД"], a: 0 }, 
-            { q: "Напишите наименьшее натуральное число x, для которого ЛОЖНО высказывание: (x > 3) ИЛИ НЕ ((x < 4) И (x > 2))", opts: ["2", "3", "4", "5"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E дороги: A–B=2, A–C=4, A–D=6, B–C=1, C–D=3. Найдите длину кратчайшего пути из A в D.", opts: ["5", "6", "7", "8"], a: 0 }, 
-            { q: "У исполнителя Вычислитель две команды: 1. умножь на 3; 2. прибавь 2. Составьте алгоритм получения из числа 3 числа 69 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: если (s > 10) или (t > A), то YES, иначе NO. Пары: (5,2), (15,2), (5,12), (15,12), (10,5). Найдите A, при котором YES ровно 3 раза.", opts: ["8", "10", "12", "15"], a: 1 }, 
-            { q: "Доступ к файлу rus.doc на сервере obr.org по протоколу https. Фрагменты: 1) doc 2) rus 3) org 4) https 5) obr 6) / 7) :// 8) .. Запишите последовательность цифр.", opts: ["475836172", "475863172", "475836712", "475836127"], a: 0 }, 
-            { q: "В таблице приведены запросы: Диана & (Аврора | Паллада) — 800; Диана & Аврора & Паллада — 220; Диана & Аврора — 550. Найдите количество страниц по запросу «Диана & Паллада».", opts: ["430", "470", "500", "530"], a: 1 }, 
-            { q: "Сколько существует различных путей из A в G? Дороги: A→B, A→D, B→C, B→E, C→E, C→G, D→E, D→F, E→G, E→F, F→G.", opts: ["8", "10", "12", "14"], a: 1 }, 
-            { q: "Среди чисел 100000₂, 45₁₀, 53₈ найдите наименьшее и запишите его в десятичной системе.", opts: ["32", "45", "43", "53"], a: 0 }, 
-            { q: "Файл 4 Кбайт передаётся со скоростью 1024 бит/с. Сколько секунд займёт передача?", opts: ["16", "24", "32", "48"], a: 2 }, 
-            { q: "Слово «Привет» (6 букв) в 16-битной кодировке. Сколько байт оно занимает?", opts: ["6", "12", "16", "24"], a: 1 }, 
-            { q: "Для какого X истинно: НЕ (X < 6) И (X < 7)", opts: ["5", "6", "7", "8"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E дороги: A–B=2, B–D=3, A–C=5, C–D=1, D–E=4. Кратчайший путь A→E?", opts: ["7", "8", "9", "10"], a: 2 }, 
-            { q: "У исполнителя две команды: 1. умножь на 3; 2. прибавь 2. Получите из 2 число 28 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: если (s < 10) и (t > A), то YES. Пары: (1,2), (11,2), (1,12), (11,12), (5,5). Найдите A, при котором YES ровно 2 раза.", opts: ["1", "3", "5", "7"], a: 1 } 
-        ] 
-    },
-    { 
-        theme: "theme-volcano", name: "Вулкан", 
-        questions: [ 
-            { q: "В кодировке Unicode каждый символ кодируется 16 битами. Вова написал текст: «Мои любимые герои мультфильмов: Шрек, Пумба, Маугли, Рататуй, Пиноккио, Винни-Пух, Белоснежка, Малефисента, Человек-паук, Конек-Горбунок». Ученик удалил имя героя, а также лишние запятую и пробел. Размер нового предложения оказался на 12 байт меньше. Напишите удалённое имя.", opts: ["Шрек", "Пумба", "Маугли", "Пиноккио"], a: 0 }, 
-            { q: "Разведчик передал радиограмму: •—•• ••• —. Известно, что использовались только буквы: А(•—), Д(•••), Ж(•—••), Л(—). Определите текст радиограммы.", opts: ["ЖДА", "ЖАЛ", "ДЖА", "АЖД"], a: 0 }, 
-            { q: "Напишите наименьшее натуральное число x, для которого ЛОЖНО высказывание: (x > 3) ИЛИ НЕ ((x < 4) И (x > 2))", opts: ["2", "3", "4", "5"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E дороги: A–B=2, A–C=4, A–D=6, B–C=1, C–D=3. Найдите длину кратчайшего пути из A в D.", opts: ["5", "6", "7", "8"], a: 0 }, 
-            { q: "У исполнителя Вычислитель две команды: 1. умножь на 3; 2. прибавь 2. Составьте алгоритм получения из числа 3 числа 69 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: если (s > 10) или (t > A), то YES, иначе NO. Пары: (5,2), (15,2), (5,12), (15,12), (10,5). Найдите A, при котором YES ровно 3 раза.", opts: ["8", "10", "12", "15"], a: 1 }, 
-            { q: "Доступ к файлу rus.doc на сервере obr.org по протоколу https. Фрагменты: 1) doc 2) rus 3) org 4) https 5) obr 6) / 7) :// 8) .. Запишите последовательность цифр.", opts: ["475836172", "475863172", "475836712", "475836127"], a: 0 }, 
-            { q: "В таблице приведены запросы: Диана & (Аврора | Паллада) — 800; Диана & Аврора & Паллада — 220; Диана & Аврора — 550. Найдите количество страниц по запросу «Диана & Паллада».", opts: ["430", "470", "500", "530"], a: 1 }, 
-            { q: "Сколько существует различных путей из A в G? Дороги: A→B, A→D, B→C, B→E, C→E, C→G, D→E, D→F, E→G, E→F, F→G.", opts: ["8", "10", "12", "14"], a: 1 }, 
-            { q: "Среди чисел 100000₂, 45₁₀, 53₈ найдите наименьшее и запишите его в десятичной системе.", opts: ["32", "45", "43", "53"], a: 0 }, 
-            { q: "Файл 4 Кбайт передаётся со скоростью 1024 бит/с. Сколько секунд займёт передача?", opts: ["16", "24", "32", "48"], a: 2 }, 
-            { q: "Слово «Привет» (6 букв) в 16-битной кодировке. Сколько байт оно занимает?", opts: ["6", "12", "16", "24"], a: 1 }, 
-            { q: "Для какого X истинно: НЕ (X < 6) И (X < 7)", opts: ["5", "6", "7", "8"], a: 1 }, 
-            { q: "Между пунктами A, B, C, D, E дороги: A–B=2, B–D=3, A–C=5, C–D=1, D–E=4. Кратчайший путь A→E?", opts: ["7", "8", "9", "10"], a: 2 }, 
-            { q: "У исполнителя две команды: 1. умножь на 3; 2. прибавь 2. Получите из 2 число 28 (не более 5 команд).", opts: ["12122", "21212", "11221", "22112"], a: 0 }, 
-            { q: "Программа: если (s < 10) и (t > A), то YES. Пары: (1,2), (11,2), (1,12), (11,12), (5,5). Найдите A, при котором YES ровно 2 раза.", opts: ["1", "3", "5", "7"], a: 1 } 
-        ] 
-    }
+    { name: "Космос", theme: "theme-1", questions: [
+        { q: "Переведи число 45 из десятичной в двоичную.", opts: ["101101", "101100", "110101", "101110"], a: 0 },
+        { q: "Для какого X истинно:\nНЕ (X < 6) И (X < 7)", opts: ["5", "6", "7", "8"], a: 1 },
+        { q: "Сколько бит в 1 Кбайте?", opts: ["1024", "8192", "8000", "4096"], a: 1 },
+        { q: "Где хранится файл?\nD:\\ОГЭ\\Задания\\Задача.doc", opts: ["D:\\ОГЭ", "D:\\ОГЭ\\Задания", "Задания", "D:\\"], a: 1 },
+        { q: "s := 0\nдля i от 1 до 5\n  s := s + i\nЧему равно s?", opts: ["10", "15", "20", "25"], a: 1 },
+        { q: "Повтори 4 [Вперёд 50, Направо 90]\nКакая фигура?", opts: ["Квадрат", "Треугольник", "Ромб", "Круг"], a: 0 },
+        { q: "Слово «Привет» (6 букв) в 16-битной кодировке.\nСколько байт?", opts: ["6", "12", "16", "24"], a: 1 },
+        { q: "A–B=2, B–D=3, A–C=5, C–D=1, D–E=4.\nКратчайший путь A→E?", opts: ["7", "8", "9", "10"], a: 2 },
+        { q: "Чему равно НЕ (A ИЛИ B)?", opts: ["НЕ A И НЕ B", "НЕ A ИЛИ НЕ B", "A И B", "A ИЛИ B"], a: 0 },
+        { q: "Сообщение 32 бита, 8-битная кодировка.\nСколько символов?", opts: ["2", "4", "8", "16"], a: 1 },
+        { q: "В адресе http://school.ru/doc.txt\nчто является протоколом?", opts: ["http", "school.ru", "doc.txt", "//"], a: 0 },
+        { q: "Переведи 100000₂ в десятичную.", opts: ["16", "32", "64", "128"], a: 1 },
+        { q: "s := 1\nдля i от 1 до 4\n  s := s * 2\nЧему равно s?", opts: ["8", "12", "16", "32"], a: 2 },
+        { q: "Слово «ОГЭ» в 16-битной кодировке.\nСколько байт?", opts: ["3", "6", "9", "12"], a: 1 },
+        { q: "Маша&(Оля|Катя)=500\nМаша&Оля&Катя=100\nМаша&Оля=300\nНайди Маша&Катя.", opts: ["200", "300", "400", "500"], a: 1 },
+        { q: "если (s > 10) или (t > A): YES.\nПары: (5,2), (15,2), (5,12), (15,12), (10,5).\nНайди A, при котором YES ровно 3 раза.", opts: ["8", "10", "12", "15"], a: 1 }
+    ]},
+    { name: "Джунгли", theme: "theme-2", questions: [
+        { q: "Переведи 100000₂ в десятичную.", opts: ["16", "32", "64", "128"], a: 1 },
+        { q: "Для какого X истинно:\nНЕ (X < 5) И (X < 7)", opts: ["4", "5", "6", "7"], a: 1 },
+        { q: "Сколько Кбайт в 2 Мбайтах?", opts: ["1024", "2048", "4096", "8192"], a: 1 },
+        { q: "В адресе ftp://files.net/data.zip\nчто является сервером?", opts: ["ftp", "files.net", "data.zip", "://"], a: 1 },
+        { q: "s := 0\nдля i от 1 до 6\n  s := s + i\nЧему равно s?", opts: ["15", "21", "28", "36"], a: 1 },
+        { q: "Повтори 3 [Вперёд 40, Направо 120]\nКакая фигура?", opts: ["Квадрат", "Треугольник", "Шестиугольник", "Ромб"], a: 1 },
+        { q: "Слово «ОГЭ» в 16-битной кодировке.\nСколько байт?", opts: ["3", "6", "9", "12"], a: 1 },
+        { q: "A–B=1, B–C=2, A–C=5, C–D=3, B–D=6.\nКратчайший A→D?", opts: ["5", "6", "7", "8"], a: 1 },
+        { q: "Чему равно A И (B ИЛИ C)?", opts: ["(A И B) ИЛИ (A И C)", "(A ИЛИ B) И C", "A ИЛИ B ИЛИ C", "(A ИЛИ B) ИЛИ C"], a: 0 },
+        { q: "Сколько бит в 2 байтах?", opts: ["8", "16", "24", "32"], a: 1 },
+        { q: "Маша&(Оля|Катя)=700\nМаша&Оля&Катя=150\nМаша&Оля=400\nНайди Маша&Катя.", opts: ["300", "400", "450", "500"], a: 2 },
+        { q: "Переведи 27₁₀ в двоичную.", opts: ["11011", "10111", "11101", "10011"], a: 0 },
+        { q: "Файл: D:\\Работы\\Задачи\\prog.exe\nВ каком каталоге?", opts: ["D:\\", "D:\\Работы", "D:\\Работы\\Задачи", "prog.exe"], a: 2 },
+        { q: "если (s < 10) и (t > A): YES.\n(1,2), (11,2), (1,12), (11,12), (5,5).\nНайди A, при котором YES 2 раза.", opts: ["1", "3", "5", "7"], a: 1 },
+        { q: "s := 0\nдля i от 1 до 10\n  если i mod 2 = 0, то s := s + i\nЧему равно s?", opts: ["20", "25", "30", "35"], a: 2 },
+        { q: "Сообщение 24 бита, 8-битная кодировка.\nСколько символов?", opts: ["2", "3", "4", "6"], a: 1 }
+    ]},
+    { name: "Киберпанк", theme: "theme-3", questions: [
+        { q: "Переведи 46₁₀ в двоичную.", opts: ["101110", "101101", "110110", "101010"], a: 0 },
+        { q: "Сколько единиц в двоичной записи числа 46?", opts: ["2", "3", "4", "5"], a: 2 },
+        { q: "Для какого X истинно:\n(X > 10) И НЕ (X > 15)", opts: ["8", "10", "12", "16"], a: 2 },
+        { q: "Файл 4 Кбайт, скорость 1024 бит/с.\nСколько секунд?", opts: ["16", "24", "32", "48"], a: 2 },
+        { q: "s := 0\nдля i от 1 до 5\n  s := s + i*i\nЧему равно s?", opts: ["30", "45", "55", "65"], a: 2 },
+        { q: "8 стр × 40 строк × 32 символа.\n8 бит на символ. Объём в Кбайтах?", opts: ["5", "10", "15", "20"], a: 1 },
+        { q: "В адресе https://wiki.org/page.html\nчто является сервером?", opts: ["https", "wiki.org", "page.html", "://"], a: 1 },
+        { q: "A–B=3, A–C=2, B–C=1, B–D=4, C–D=2, C–E=5, D–E=1.\nПуть A→E?", opts: ["4", "5", "6", "7"], a: 1 },
+        { q: "Чему равно НЕ (A И B)?", opts: ["НЕ A И НЕ B", "НЕ A ИЛИ НЕ B", "A ИЛИ B", "НЕ A И B"], a: 1 },
+        { q: "Сколько Кбайт в 2048 байтах?", opts: ["1", "2", "4", "8"], a: 1 },
+        { q: "Переведи 111111₂ в десятичную.", opts: ["31", "63", "127", "255"], a: 1 },
+        { q: "Диана&(Аврора|Паллада)=800\nДиана&Аврора&Паллада=220\nДиана&Аврора=550\nНайди Диана&Паллада.", opts: ["430", "470", "500", "530"], a: 1 },
+        { q: "если (s > 5) ИЛИ (t < A): YES.\n(1,2), (6,2), (1,7), (6,7), (-1,-2).\nНайди A, при котором YES 3 раза.", opts: ["1", "2", "3", "4"], a: 1 },
+        { q: "Файл photo.jpg лежит в D:\\Фото\\Море.\nЗапиши полное имя файла.", opts: ["D:\\Фото", "D:\\Фото\\Море", "D:\\Фото\\Море\\photo.jpg", "photo.jpg"], a: 2 },
+        { q: "s := 0\nдля i от 1 до 4\n  s := s + i*i\nЧему равно s?", opts: ["20", "25", "30", "35"], a: 2 },
+        { q: "Сообщение 128 бит, 16-битная кодировка.\nСколько символов?", opts: ["4", "6", "8", "16"], a: 2 }
+    ]},
+    { name: "Океан", theme: "theme-4", questions: [
+        { q: "Сколько бит в 1 Мбайте?", opts: ["1048576", "8388608", "4194304", "16777216"], a: 1 },
+        { q: "Переведи 50₁₀ в двоичную.", opts: ["110010", "110100", "100110", "101010"], a: 0 },
+        { q: "Для какого X истинно:\nНЕ (X > 5) И (X > 3)", opts: ["2", "4", "6", "8"], a: 1 },
+        { q: "Повтори 6 [Вперёд 40, Направо 60]\nКакая фигура?", opts: ["Квадрат", "Треугольник", "Шестиугольник", "Ромб"], a: 2 },
+        { q: "s := 0\nдля i от 1 до 10\n  s := s + i\nЧему равно s?", opts: ["45", "50", "55", "60"], a: 2 },
+        { q: "Слово «Файл» в 16-битной кодировке.\nСколько байт?", opts: ["4", "8", "12", "16"], a: 1 },
+        { q: "A–B=2, A–C=4, B–C=1, B–D=5, C–D=2, D–E=3.\nПуть A→E?", opts: ["6", "7", "8", "9"], a: 2 },
+        { q: "Чему равно A ИЛИ (B И C)?", opts: ["(A ИЛИ B) И (A ИЛИ C)", "A И B И C", "A ИЛИ B ИЛИ C", "(A И B) ИЛИ C"], a: 0 },
+        { q: "В адресе https://ru.wikipedia.org/wiki\nчто является сервером?", opts: ["https", "ru.wikipedia.org", "wiki", "://"], a: 1 },
+        { q: "Файл 2 Кбайт, скорость 512 бит/с.\nСколько секунд?", opts: ["16", "24", "32", "48"], a: 2 },
+        { q: "Переведи 111₁₀ в восьмеричную.", opts: ["147", "157", "167", "177"], a: 1 },
+        { q: "Солнце&(Лето|Море)=400\nСолнце&Лето&Море=80\nСолнце&Лето=250\nНайди Солнце&Море.", opts: ["200", "230", "250", "280"], a: 1 },
+        { q: "если (s > 5) ИЛИ (t > A): YES.\n(1,2), (6,2), (1,7), (6,7), (5,5).\nНайди наименьшее A, при котором YES 2 раза.", opts: ["5", "6", "7", "8"], a: 2 },
+        { q: "Сколько байт в 4 Кбайтах?", opts: ["2048", "4096", "8192", "1024"], a: 1 },
+        { q: "Сообщение 24 бита, 8-битная кодировка.\nСколько символов?", opts: ["2", "3", "4", "6"], a: 1 },
+        { q: "s := 0\nдля i от 1 до 5\n  если i mod 2 = 1, то s := s + i\nЧему равно s?", opts: ["6", "9", "15", "20"], a: 1 }
+    ]},
+    { name: "Вулкан", theme: "theme-5", questions: [
+        { q: "Переведи 100₁₀ в двоичную.", opts: ["1100100", "1100010", "1010100", "1110000"], a: 0 },
+        { q: "Для какого X истинно:\n(X > 4) И НЕ (X > 8)", opts: ["3", "5", "9", "10"], a: 1 },
+        { q: "Файл 4 Кбайт, скорость 2048 бит/с.\nСколько секунд?", opts: ["8", "12", "16", "20"], a: 2 },
+        { q: "Повтори 8 [Вперёд 20, Направо 45]\nКакая фигура?", opts: ["Квадрат", "Шестиугольник", "Восьмиугольник", "Ромб"], a: 2 },
+        { q: "s := 0\nдля i от 1 до 6\n  s := s + i*i\nЧему равно s?", opts: ["81", "91", "101", "111"], a: 1 },
+        { q: "Слово «Кот» в 16-битной кодировке.\nСколько байт?", opts: ["3", "6", "9", "12"], a: 1 },
+        { q: "A–B=1, A–C=2, B–C=3, B–D=4, C–D=1, D–E=5.\nПуть A→E?", opts: ["7", "8", "9", "10"], a: 1 },
+        { q: "Чему равно НЕ (A) И НЕ (B)?", opts: ["НЕ (A ИЛИ B)", "НЕ (A И B)", "A ИЛИ B", "A И B"], a: 0 },
+        { q: "Доступ к файлу index.html на сервере site.com по протоколу https.\nhttps://site.com/index.html", opts: ["https", "site.com", "index.html", "site.com/index.html"], a: 1 },
+        { q: "Луна&(Звёзды|Планеты)=300\nЛуна&Звёзды&Планеты=50\nЛуна&Звёзды=180\nНайди Луна&Планеты.", opts: ["120", "170", "220", "270"], a: 1 },
+        { q: "Файл: D:\\Учёба\\Информатика\\тест.doc\nВ каком каталоге?", opts: ["D:\\", "D:\\Учёба", "D:\\Учёба\\Информатика", "тест.doc"], a: 2 },
+        { q: "Переведи 101₁₀ в восьмеричную.", opts: ["135", "145", "155", "165"], a: 1 },
+        { q: "если (s > 10) или (t > A): YES.\n(1,2), (11,2), (1,12), (11,12), (10,10).\nНайди наибольшее A, при котором YES 3 раза.", opts: ["10", "11", "12", "13"], a: 1 },
+        { q: "Сколько байт в 8 Кбайтах?", opts: ["4096", "8192", "16384", "1024"], a: 1 },
+        { q: "Найди 5! (факториал пяти).", opts: ["60", "80", "100", "120"], a: 3 },
+        { q: "Слово «Код» в 8-битной кодировке.\nСколько байт?", opts: ["2", "3", "4", "6"], a: 1 }
+    ]},
+    { name: "Арктика", theme: "theme-6", questions: [
+        { q: "Сколько бит в 1/8 Кбайта?", opts: ["1024", "2048", "512", "4096"], a: 0 },
+        { q: "Переведи 33₁₀ в двоичную.", opts: ["100001", "100010", "110001", "101001"], a: 0 },
+        { q: "Для какого X ложно:\nНЕ (X > 2) И (X < 5)", opts: ["3", "4", "2", "1"], a: 0 },
+        { q: "A–B=4, B–C=2, A–C=5, C–D=3.\nПуть A→D?", opts: ["8", "9", "10", "7"], a: 0 },
+        { q: "s := 0\nдля i от 1 до 4\n  s := s + i*2\nЧему равно s?", opts: ["10", "20", "15", "25"], a: 1 },
+        { q: "Слово «Мир» в 16-битной кодировке.\nСколько байт?", opts: ["3", "6", "9", "12"], a: 1 },
+        { q: "В URL ftp://test.ru/file.txt\nчто является протоколом?", opts: ["ftp", "test.ru", "file.txt", "://"], a: 0 },
+        { q: "Сколько существует путей из A в D?\nA→B, A→C, B→C, B→D, C→D", opts: ["2", "3", "4", "5"], a: 1 },
+        { q: "Чему равно A И (НЕ B)?", opts: ["A И B", "A И НЕ B", "НЕ A И B", "НЕ (A И B)"], a: 1 },
+        { q: "Переведи 111₁₀ в двоичную.", opts: ["1101111", "110111", "1110111", "1001111"], a: 0 },
+        { q: "Файл 8 Кбайт, скорость 4096 бит/с.\nСколько секунд?", opts: ["16", "24", "32", "8"], a: 0 },
+        { q: "Поиск: Коты & (Собаки | Птицы) = 500\nКоты & Собаки & Птицы = 50\nКоты & Собаки = 200\nНайди Коты & Птицы.", opts: ["300", "350", "400", "250"], a: 1 },
+        { q: "если (s > 2) И (t < A): YES.\n(1,1), (3,1), (1,5), (3,5), (2,3).\nНайди A, при котором YES 2 раза.", opts: ["5", "6", "7", "8"], a: 1 },
+        { q: "Сколько байт в 16 Кбайтах?", opts: ["16384", "8192", "32768", "65536"], a: 0 },
+        { q: "Найди 4! (факториал четырёх).", opts: ["12", "24", "16", "32"], a: 1 },
+        { q: "Слово «Дом» в 8-битной кодировке.\nСколько байт?", opts: ["2", "3", "4", "6"], a: 1 }
+    ]},
+    { name: "Пустыня", theme: "theme-7", questions: [
+        { q: "Переведи 25₁₀ в двоичную.", opts: ["11001", "11010", "10011", "11101"], a: 0 },
+        { q: "Для какого X истинно:\n(X > 5) ИЛИ НЕ (X > 3)", opts: ["2", "4", "6", "8"], a: 2 },
+        { q: "Сколько бит в 1/2 Кбайта?", opts: ["4096", "2048", "1024", "8192"], a: 0 },
+        { q: "Повтори 5 [Вперёд 20, Направо 72]\nКакая фигура?", opts: ["Пятиугольник", "Шестиугольник", "Восьмиугольник", "Квадрат"], a: 0 },
+        { q: "s := 0\nдля i от 1 до 3\n  s := s + i*i*i\nЧему равно s?", opts: ["36", "27", "45", "18"], a: 0 },
+        { q: "Слово «Тест» в 8-битной кодировке.\nСколько бит?", opts: ["32", "16", "24", "8"], a: 0 },
+        { q: "В URL http://edu.ru/index.html\nчто является сервером?", opts: ["http", "edu.ru", "index.html", "/"], a: 1 },
+        { q: "A–B=1, B–C=2, A–C=4, C–D=3, B–D=6.\nПуть A→D?", opts: ["5", "6", "7", "8"], a: 1 },
+        { q: "Чему равно НЕ (A ИЛИ B) И A?", opts: ["A", "B", "0", "1"], a: 2 },
+        { q: "Переведи 1011₂ в десятичную.", opts: ["9", "11", "13", "15"], a: 1 },
+        { q: "Файл 2 Кбайт, скорость 1024 бит/с.\nСколько секунд?", opts: ["8", "16", "24", "32"], a: 1 },
+        { q: "Поиск: Лето & (Море | Солнце) = 800\nЛето & Море & Солнце = 100\nЛето & Море = 400\nНайди Лето & Солнце.", opts: ["300", "400", "500", "600"], a: 2 },
+        { q: "если (s > 10) ИЛИ (t > A): YES.\n(5,2), (15,2), (5,12), (15,12), (10,10).\nНайди наименьшее A, при котором YES 3 раза.", opts: ["9", "10", "11", "12"], a: 1 },
+        { q: "Сколько байт в 1 Мбайте?", opts: ["1024", "1048576", "2048", "512"], a: 1 },
+        { q: "Слово «Байт» в 16-битной кодировке.\nСколько байт?", opts: ["4", "8", "12", "16"], a: 1 },
+        { q: "Сколько существует путей из A в C?\nA→B, A→C, B→C", opts: ["1", "2", "3", "4"], a: 1 }
+    ]},
+    { name: "Лес", theme: "theme-8", questions: [
+        { q: "Переведи 50₁₀ в восьмеричную.", opts: ["62", "72", "52", "42"], a: 0 },
+        { q: "Для какого X ложно:\n(X > 2) И (X < 5)", opts: ["3", "4", "5", "2"], a: 2 },
+        { q: "Сколько бит в 1/4 Мбайта?", opts: ["2097152", "1048576", "4194304", "524288"], a: 0 },
+        { q: "s := 0\nдля i от 1 до 10\n  если i mod 2 = 0, то s := s + i\nЧему равно s?", opts: ["30", "20", "25", "40"], a: 0 },
+        { q: "Повтори 3 [Вперёд 50, Направо 120]\nКакая фигура?", opts: ["Квадрат", "Треугольник", "Ромб", "Круг"], a: 1 },
+        { q: "Слово «Год» в 16-битной кодировке.\nСколько бит?", opts: ["48", "24", "16", "32"], a: 0 },
+        { q: "В URL https://test.ru/file.txt\nчто является протоколом?", opts: ["https", "test.ru", "file.txt", "://"], a: 0 },
+        { q: "A–B=2, B–C=3, A–C=4, C–D=1, B–D=5.\nПуть A→D?", opts: ["5", "6", "7", "8"], a: 0 },
+        { q: "Чему равно A ИЛИ (НЕ B)?", opts: ["A И B", "A ИЛИ НЕ B", "НЕ A И B", "НЕ (A И B)"], a: 1 },
+        { q: "Переведи 1001₂ в десятичную.", opts: ["7", "8", "9", "10"], a: 2 },
+        { q: "Файл 4 Кбайт, скорость 1024 бит/с.\nСколько секунд?", opts: ["16", "32", "24", "48"], a: 1 },
+        { q: "Поиск: Кот & (Пес | Мышь) = 600\nКот & Пес & Мышь = 100\nКот & Пес = 300\nНайди Кот & Мышь.", opts: ["300", "400", "500", "200"], a: 1 },
+        { q: "если (s < 5) И (t > A): YES.\n(1,2), (6,2), (1,7), (6,7), (5,5).\nНайди A, при котором YES 2 раза.", opts: ["1", "2", "3", "4"], a: 0 },
+        { q: "Сколько байт в 1/2 Кбайта?", opts: ["512", "1024", "256", "2048"], a: 0 },
+        { q: "Слово «Сеть» в 8-битной кодировке.\nСколько байт?", opts: ["4", "8", "12", "16"], a: 0 },
+        { q: "Сколько существует путей из A в D?\nA→B, A→C, B→C, B→D, C→D", opts: ["2", "3", "4", "5"], a: 1 }
+    ]},
+    { name: "Город", theme: "theme-9", questions: [
+        { q: "Переведи 100₁₀ в восьмеричную.", opts: ["144", "154", "134", "124"], a: 0 },
+        { q: "Для какого X истинно:\n(X > 10) И НЕ (X > 15)", opts: ["8", "10", "12", "16"], a: 2 },
+        { q: "Сколько бит в 1/8 Мбайта?", opts: ["1048576", "524288", "2097152", "4194304"], a: 0 },
+        { q: "Повтори 6 [Вперёд 30, Направо 60]\nКакая фигура?", opts: ["Шестиугольник", "Квадрат", "Треугольник", "Ромб"], a: 0 },
+        { q: "s := 0\nдля i от 1 до 4\n  s := s + i*i\nЧему равно s?", opts: ["30", "20", "25", "35"], a: 0 },
+        { q: "Слово «Код» в 16-битной кодировке.\nСколько байт?", opts: ["6", "3", "9", "12"], a: 0 },
+        { q: "В URL ftp://files.net/data.zip\nчто является сервером?", opts: ["ftp", "files.net", "data.zip", "://"], a: 1 },
+        { q: "A–B=1, B–C=2, A–C=5, C–D=3, B–D=6.\nПуть A→D?", opts: ["5", "6", "7", "8"], a: 1 },
+        { q: "Чему равно НЕ (A И B) И A?", opts: ["A", "B", "0", "1"], a: 2 },
+        { q: "Переведи 111111₂ в десятичную.", opts: ["31", "63", "127", "255"], a: 1 },
+        { q: "Файл 8 Кбайт, скорость 2048 бит/с.\nСколько секунд?", opts: ["16", "32", "24", "48"], a: 1 },
+        { q: "Поиск: Маша & (Оля | Катя) = 700\nМаша & Оля & Катя = 150\nМаша & Оля = 400\nНайди Маша & Катя.", opts: ["300", "400", "450", "500"], a: 2 },
+        { q: "если (s > 5) ИЛИ (t > A): YES.\n(1,2), (6,2), (1,7), (6,7), (5,5).\nНайди наибольшее A, при котором YES 2 раза.", opts: ["5", "6", "7", "8"], a: 2 },
+        { q: "Сколько байт в 2 Кбайтах?", opts: ["2048", "1024", "4096", "8192"], a: 0 },
+        { q: "Слово «Мир» в 8-битной кодировке.\nСколько байт?", opts: ["3", "6", "9", "12"], a: 0 },
+        { q: "Сколько существует путей из A в C?\nA→B, A→C, B→C", opts: ["1", "2", "3", "4"], a: 1 }
+    ]},
+    { name: "Горы", theme: "theme-10", questions: [
+        { q: "Переведи 101010₂ в десятичную.", opts: ["42", "44", "46", "48"], a: 0 },
+        { q: "Для какого X ложно:\n(X > 2) И (X < 5)", opts: ["3", "4", "5", "2"], a: 2 },
+        { q: "Сколько бит в 1/16 Кбайта?", opts: ["512", "1024", "256", "2048"], a: 0 },
+        { q: "s := 0\nдля i от 1 до 5\n  если i mod 2 = 1, то s := s + i\nЧему равно s?", opts: ["6", "9", "15", "20"], a: 1 },
+        { q: "Повтори 4 [Вперёд 40, Направо 90]\nКакая фигура?", opts: ["Квадрат", "Треугольник", "Ромб", "Круг"], a: 0 },
+        { q: "Слово «Бит» в 16-битной кодировке.\nСколько байт?", opts: ["6", "8", "3", "12"], a: 0 },
+        { q: "В URL http://test.ru/file.txt\nчто является файлом?", opts: ["http", "test.ru", "file.txt", "/"], a: 2 },
+        { q: "A–B=2, B–C=1, A–C=5, C–D=2.\nПуть A→D?", opts: ["5", "6", "7", "8"], a: 0 },
+        { q: "Чему равно A И (B ИЛИ C)?", opts: ["(A И B) ИЛИ (A И C)", "(A ИЛИ B) И C", "A ИЛИ B ИЛИ C", "(A ИЛИ B) ИЛИ C"], a: 0 },
+        { q: "Переведи 64₁₀ в двоичную.", opts: ["1000000", "100000", "1100000", "10000000"], a: 0 },
+        { q: "Файл 2 Кбайт, скорость 512 бит/с.\nСколько секунд?", opts: ["16", "24", "32", "48"], a: 2 },
+        { q: "Поиск: Солнце & (Лето | Море) = 400\nСолнце & Лето & Море = 80\nСолнце & Лето = 250\nНайди Солнце & Море.", opts: ["200", "230", "250", "280"], a: 1 },
+        { q: "если (s > 5) ИЛИ (t > A): YES.\n(1,2), (6,2), (1,7), (6,7), (5,5).\nНайди наименьшее A, при котором YES 2 раза.", opts: ["5", "6", "7", "8"], a: 2 },
+        { q: "Сколько байт в 4 Кбайтах?", opts: ["2048", "4096", "8192", "1024"], a: 1 },
+        { q: "Слово «Файл» в 8-битной кодировке.\nСколько байт?", opts: ["4", "8", "12", "16"], a: 0 },
+        { q: "Сколько существует путей из A в D?\nA→B, A→C, B→D, C→D", opts: ["2", "3", "4", "1"], a: 0 }
+    ]},
+    { name: "Луна", theme: "theme-11", questions: [
+        { q: "Переведи 77₁₀ в двоичную.", opts: ["1001101", "1001011", "1101101", "1011101"], a: 0 },
+        { q: "Для какого X истинно:\n(X > 5) И НЕ (X > 8)", opts: ["4", "6", "9", "10"], a: 1 },
+        { q: "Сколько бит в 1/32 Мбайта?", opts: ["262144", "524288", "1048576", "131072"], a: 0 },
+        { q: "Повтори 3 [Вперёд 10, Направо 120]\nКакая фигура?", opts: ["Треугольник", "Квадрат", "Шестиугольник", "Ромб"], a: 0 },
+        { q: "s := 0\nдля i от 1 до 3\n  s := s + i*i\nЧему равно s?", opts: ["14", "12", "16", "18"], a: 0 },
+        { q: "Слово «Кот» в 8-битной кодировке.\nСколько байт?", opts: ["3", "6", "9", "12"], a: 0 },
+        { q: "В URL https://wiki.org/page.html\nчто является сервером?", opts: ["https", "wiki.org", "page.html", "://"], a: 1 },
+        { q: "A–B=3, A–C=2, B–C=1, B–D=4, C–D=2.\nПуть A→D?", opts: ["4", "5", "6", "7"], a: 0 },
+        { q: "Чему равно НЕ (A И B)?", opts: ["НЕ A И НЕ B", "НЕ A ИЛИ НЕ B", "A ИЛИ B", "НЕ A И B"], a: 1 },
+        { q: "Переведи 1111₂ в десятичную.", opts: ["15", "13", "17", "19"], a: 0 },
+        { q: "Файл 4 Кбайт, скорость 2048 бит/с.\nСколько секунд?", opts: ["8", "12", "16", "20"], a: 2 },
+        { q: "Поиск: Луна & (Звёзды | Планеты) = 300\nЛуна & Звёзды & Планеты = 50\nЛуна & Звёзды = 180\nНайди Луна & Планеты.", opts: ["120", "170", "220", "270"], a: 1 },
+        { q: "если (s > 10) или (t > A): YES.\n(1,2), (11,2), (1,12), (11,12), (10,10).\nНайди наибольшее A, при котором YES 3 раза.", opts: ["10", "11", "12", "13"], a: 1 },
+        { q: "Сколько байт в 8 Кбайтах?", opts: ["4096", "8192", "16384", "1024"], a: 1 },
+        { q: "Найди 5! (факториал пяти).", opts: ["60", "80", "100", "120"], a: 3 },
+        { q: "Слово «Код» в 8-битной кодировке.\nСколько байт?", opts: ["2", "3", "4", "6"], a: 1 }
+    ]},
+    { name: "Преисподняя", theme: "theme-12", questions: [
+        { q: "Переведи 128₁₀ в двоичную.", opts: ["10000000", "1000000", "11000000", "11111111"], a: 0 },
+        { q: "Для какого X ложно:\n(X > 7) И НЕ (X > 10)", opts: ["8", "10", "11", "7"], a: 2 },
+        { q: "Сколько бит в 1/64 Мбайта?", opts: ["131072", "65536", "262144", "524288"], a: 0 },
+        { q: "Повтори 6 [Вперёд 20, Направо 60]\nКакая фигура?", opts: ["Шестиугольник", "Квадрат", "Треугольник", "Ромб"], a: 0 },
+        { q: "s := 0\nдля i от 1 до 4\n  s := s + i*2\nЧему равно s?", opts: ["20", "16", "24", "12"], a: 0 },
+        { q: "Слово «Байт» в 16-битной кодировке.\nСколько бит?", opts: ["64", "32", "16", "48"], a: 0 },
+        { q: "В URL ftp://test.ru/file.txt\nчто является протоколом?", opts: ["ftp", "test.ru", "file.txt", "://"], a: 0 },
+        { q: "A–B=2, B–C=3, A–C=6, C–D=4, B–D=5.\nПуть A→D?", opts: ["7", "8", "9", "10"], a: 0 },
+        { q: "Чему равно A ИЛИ (B И C)?", opts: ["(A ИЛИ B) И (A ИЛИ C)", "A И B И C", "A ИЛИ B ИЛИ C", "(A И B) ИЛИ C"], a: 0 },
+        { q: "Переведи 10000₂ в десятичную.", opts: ["16", "32", "8", "64"], a: 0 },
+        { q: "Файл 16 Кбайт, скорость 8192 бит/с.\nСколько секунд?", opts: ["16", "32", "8", "24"], a: 0 },
+        { q: "Поиск: Диана & (Аврора | Паллада) = 800\nДиана & Аврора & Паллада = 220\nДиана & Аврора = 550\nНайди Диана & Паллада.", opts: ["430", "470", "500", "530"], a: 1 },
+        { q: "если (s > 5) ИЛИ (t < A): YES.\n(1,2), (6,2), (1,7), (6,7), (-1,-2).\nНайди A, при котором YES 3 раза.", opts: ["1", "2", "3", "4"], a: 1 },
+        { q: "Сколько байт в 1/4 Мбайта?", opts: ["262144", "524288", "1048576", "131072"], a: 0 },
+        { q: "Слово «Сеть» в 16-битной кодировке.\nСколько байт?", opts: ["8", "4", "12", "16"], a: 0 },
+        { q: "Сколько существует путей из A в D?\nA→B, B→C, B→D, A→C, C→D", opts: ["3", "4", "5", "2"], a: 0 }
+    ]},
+    { name: "Финал", theme: "theme-13", questions: [
+        { q: "Переведи 200₁₀ в двоичную.", opts: ["11001000", "11000100", "11101000", "11001001"], a: 0 },
+        { q: "Для какого X истинно:\nНЕ (X < 2) И (X > 5)", opts: ["1", "2", "5", "6"], a: 3 },
+        { q: "Сколько бит в 1/128 Мбайта?", opts: ["65536", "131072", "32768", "262144"], a: 0 },
+        { q: "Повтори 8 [Вперёд 10, Направо 45]\nКакая фигура?", opts: ["Восьмиугольник", "Шестиугольник", "Квадрат", "Ромб"], a: 0 },
+        { q: "s := 0\nдля i от 1 до 5\n  s := s + i*i*i\nЧему равно s?", opts: ["225", "125", "250", "300"], a: 0 },
+        { q: "Слово «Информатика» в 8-битной кодировке.\nСколько байт?", opts: ["11", "22", "33", "44"], a: 0 },
+        { q: "В URL https://obr.org/rus.doc\nЗапиши последовательность цифр (1-doc, 2-rus, 3-org, 4-https, 5-obr, 6-/, 7-://, 8-.).", opts: ["475836281", "475836172", "475863281", "475836821"], a: 0 },
+        { q: "A–B=1, A–C=2, B–C=3, B–D=4, C–D=1, D–E=5.\nПуть A→E?", opts: ["7", "8", "9", "10"], a: 1 },
+        { q: "Чему равно НЕ (A) И НЕ (B)?", opts: ["НЕ (A ИЛИ B)", "НЕ (A И B)", "A ИЛИ B", "A И B"], a: 0 },
+        { q: "Переведи 11111111₂ в десятичную.", opts: ["255", "127", "511", "1023"], a: 0 },
+        { q: "Файл 1 Мбайт, скорость 1 Мбит/с.\nСколько секунд?", opts: ["1", "8", "10", "16"], a: 1 },
+        { q: "Поиск: Маша & (Оля | Катя) = 500\nМаша & Оля & Катя = 100\nМаша & Оля = 300\nНайди Маша & Катя.", opts: ["200", "300", "400", "500"], a: 1 },
+        { q: "если (s > 10) или (t > A): YES.\n(5,2), (15,2), (5,12), (15,12), (10,5).\nНайди A, при котором YES ровно 3 раза.", opts: ["8", "10", "12", "15"], a: 1 },
+        { q: "Сколько байт в 1/8 Мбайта?", opts: ["131072", "262144", "524288", "65536"], a: 0 },
+        { q: "Найди 6! (факториал шести).", opts: ["720", "360", "120", "640"], a: 0 },
+        { q: "Слово «Финал» в 16-битной кодировке.\nСколько байт?", opts: ["10", "20", "15", "25"], a: 0 }
+    ]}
 ];
 
 /* =========================================================
@@ -353,9 +464,7 @@ const LEVELS = [
 let audioCtx = null;
 function initAudio() { 
     if (!audioCtx) {
-        try {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        } catch (e) {}
+        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
     }
 }
 
@@ -365,11 +474,43 @@ function playSound(type) {
         const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
         osc.connect(gain); gain.connect(audioCtx.destination);
         const now = audioCtx.currentTime;
-        if (type === 'coin') { osc.type='square'; osc.frequency.setValueAtTime(987.77,now); osc.frequency.setValueAtTime(1318.51,now+0.1); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.4); osc.start(now); osc.stop(now+0.4); }
-        else if (type === 'die') { osc.type='sawtooth'; osc.frequency.setValueAtTime(300,now); osc.frequency.exponentialRampToValueAtTime(50,now+0.8); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.8); osc.start(now); osc.stop(now+0.8); }
-        else if (type === 'bump') { osc.type='square'; osc.frequency.setValueAtTime(150,now); osc.frequency.exponentialRampToValueAtTime(80,now+0.2); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.2); osc.start(now); osc.stop(now+0.2); }
-        else if (type === 'powerup') { osc.type='triangle'; osc.frequency.setValueAtTime(440,now); osc.frequency.linearRampToValueAtTime(880,now+0.2); osc.frequency.linearRampToValueAtTime(1760,now+0.4); gain.gain.setValueAtTime(0.1,now); gain.gain.linearRampToValueAtTime(0.01,now+0.5); osc.start(now); osc.stop(now+0.5); }
-        else if (type === 'shuffle') { osc.type='sine'; osc.frequency.setValueAtTime(400,now); osc.frequency.exponentialRampToValueAtTime(800,now+0.1); osc.frequency.exponentialRampToValueAtTime(400,now+0.2); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.3); osc.start(now); osc.stop(now+0.3); }
+        
+        if (type === 'coin') { 
+            osc.type='square'; osc.frequency.setValueAtTime(987.77,now); osc.frequency.setValueAtTime(1318.51,now+0.1); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.4); osc.start(now); osc.stop(now+0.4); 
+        }
+        else if (type === 'die') { 
+            osc.type='sawtooth'; osc.frequency.setValueAtTime(300,now); osc.frequency.exponentialRampToValueAtTime(50,now+0.8); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.8); osc.start(now); osc.stop(now+0.8); 
+        }
+        else if (type === 'bump') { 
+            osc.type='square'; osc.frequency.setValueAtTime(150,now); osc.frequency.exponentialRampToValueAtTime(80,now+0.2); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.2); osc.start(now); osc.stop(now+0.2); 
+        }
+        else if (type === 'powerup') { 
+            osc.type='triangle'; osc.frequency.setValueAtTime(440,now); osc.frequency.linearRampToValueAtTime(880,now+0.2); osc.frequency.linearRampToValueAtTime(1760,now+0.4); gain.gain.setValueAtTime(0.1,now); gain.gain.linearRampToValueAtTime(0.01,now+0.5); osc.start(now); osc.stop(now+0.5); 
+        }
+        else if (type === 'shuffle') { 
+            osc.type='sine'; osc.frequency.setValueAtTime(400,now); osc.frequency.exponentialRampToValueAtTime(800,now+0.1); osc.frequency.exponentialRampToValueAtTime(400,now+0.2); gain.gain.setValueAtTime(0.1,now); gain.gain.exponentialRampToValueAtTime(0.01,now+0.3); osc.start(now); osc.stop(now+0.3); 
+        }
+        // НОВЫЙ СТРАШНЫЙ ЗВУК ПРИ ОШИБКЕ
+        else if (type === 'scream') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(120, now);
+            osc.frequency.exponentialRampToValueAtTime(40, now + 0.6);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+            osc.start(now);
+            osc.stop(now + 0.6);
+            
+            // Добавляем второй слой для жути
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.connect(gain2); gain2.connect(audioCtx.destination);
+            osc2.type = 'square';
+            osc2.frequency.setValueAtTime(80, now);
+            osc2.frequency.exponentialRampToValueAtTime(30, now + 0.5);
+            gain2.gain.setValueAtTime(0.1, now);
+            gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+            osc2.start(now); osc2.stop(now + 0.5);
+        }
     } catch(e) {}
 }
 
@@ -379,8 +520,7 @@ function playSound(type) {
 const state = { 
     levelIdx: 0, qIdx: 0, score: 0, lives: 3, isPenalty: false, locked: false, 
     marioX: 50, marioY: 0, marioVY: 0, isJumping: false, targetX: null,
-    timeLeft: 480,
-    currentPenaltyTask: null
+    timeLeft: 480, currentPenaltyTask: null
 };
 
 const elements = {
@@ -392,7 +532,8 @@ const elements = {
     modal: document.getElementById('modal'), mTitle: document.getElementById('modalTitle'),
     mEmoji: document.getElementById('modalEmoji'), mText: document.getElementById('modalText'),
     mMedia: document.getElementById('modalMedia'), mBtn: document.getElementById('modalBtn'),
-    timerDisplay: document.getElementById('shuffleTimerDisplay')
+    timerDisplay: document.getElementById('shuffleTimerDisplay'),
+    grid: document.getElementById('levels-grid')
 };
 
 const BLOCK_Y = 180;
@@ -401,25 +542,33 @@ const JUMP_POWER = 17;
 const SPEED = 15;
 
 /* =========================================================
+   ГЕНЕРАЦИЯ МЕНЮ
+   ========================================================= */
+function renderMenu() {
+    elements.grid.innerHTML = '';
+    LEVELS.forEach((lvl, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'level-btn';
+        btn.innerHTML = `${lvl.name} <span>Уровень ${i + 1}</span>`;
+        btn.onclick = () => startGame(i);
+        elements.grid.appendChild(btn);
+    });
+}
+renderMenu();
+
+/* =========================================================
    ТАЙМЕР ПЕРЕМЕШИВАНИЯ
    ========================================================= */
 let timerInterval;
-
 function startShuffleTimer() {
     clearInterval(timerInterval);
-    state.timeLeft = 480;
+    state.timeLeft = 280;
     updateTimerDisplay();
-    
     timerInterval = setInterval(() => {
         if (state.locked || elements.game.style.display === 'none' || elements.modal.classList.contains('active')) return;
-        
         state.timeLeft--;
         updateTimerDisplay();
-        
-        if (state.timeLeft <= 0) {
-            shuffleAnswers();
-            state.timeLeft = 480;
-        }
+        if (state.timeLeft <= 0) { shuffleAnswers(); state.timeLeft = 280; }
     }, 1000);
 }
 
@@ -433,41 +582,32 @@ function updateTimerDisplay() {
 function shuffleAnswers() {
     const blocks = Array.from(elements.blockRow.children);
     if (blocks.length === 0) return;
-    
     for (let i = blocks.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
     }
-    
     elements.blockRow.innerHTML = '';
     blocks.forEach(block => elements.blockRow.appendChild(block));
-    
     playSound('shuffle');
     elements.blockRow.classList.add('shake');
     setTimeout(() => elements.blockRow.classList.remove('shake'), 500);
-    
     const originalText = elements.question.innerHTML;
     elements.question.innerHTML = `<span style="color:#e52521; font-weight:bold; display:block; margin-bottom:10px;">⏳ ВРЕМЯ ВЫШЛО! ОТВЕТЫ ПЕРЕМЕШАНЫ.</span>${originalText}`;
 }
 
 /* =========================================================
-   ИГРОВОЙ ЦИКЛ (ФИЗИКА)
+   ИГРОВОЙ ЦИКЛ
    ========================================================= */
 function gameLoop() {
     if (elements.game.style.display === 'none') { requestAnimationFrame(gameLoop); return; }
-
     if (state.targetX !== null) {
-        if (Math.abs(state.marioX - state.targetX) <= SPEED) {
-            state.marioX = state.targetX; state.targetX = null; jump();
-        } else if (state.marioX < state.targetX) { state.marioX += SPEED; } else { state.marioX -= SPEED; }
+        if (Math.abs(state.marioX - state.targetX) <= SPEED) { state.marioX = state.targetX; state.targetX = null; jump(); }
+        else if (state.marioX < state.targetX) { state.marioX += SPEED; } else { state.marioX -= SPEED; }
     }
-
     if (state.isJumping) {
         state.marioY += state.marioVY;
         state.marioVY -= GRAVITY;
-
         if (state.marioY <= 0) { state.marioY = 0; state.marioVY = 0; state.isJumping = false; }
-
         if (state.marioVY > 0 && state.marioY >= BLOCK_Y - 10 && state.marioY <= BLOCK_Y + 40) {
             const blocks = document.querySelectorAll('.q-block');
             for (let i = 0; i < blocks.length; i++) {
@@ -504,8 +644,8 @@ function moveToBlock(index) { if (state.locked) return; const block = document.q
 function startGame(levelIdx) {
     initAudio(); 
     initPenaltyPool();
-    
     state.levelIdx = levelIdx; state.qIdx = 0; state.score = 0; state.lives = 3; state.isPenalty = false;
+    
     document.body.className = LEVELS[levelIdx].theme;
     elements.menu.style.display = 'none'; elements.game.style.display = 'flex'; elements.level.textContent = levelIdx + 1;
     loadQuestion();
@@ -521,7 +661,6 @@ function loadQuestion() {
     state.locked = false; state.marioX = 50; state.marioY = 0; state.marioVY = 0; state.isJumping = false; state.targetX = null;
     
     const qData = state.isPenalty ? state.currentPenaltyTask : LEVELS[state.levelIdx].questions[state.qIdx];
-    
     elements.question.textContent = (state.isPenalty ? "[ШТРАФ] " : "") + qData.q;
     elements.blockRow.innerHTML = '';
     
@@ -537,7 +676,6 @@ function loadQuestion() {
         block.dataset.correct = opt.isCorrect;
         elements.blockRow.appendChild(block);
     });
-    
     updateHUD();
     startShuffleTimer();
 }
@@ -558,7 +696,8 @@ function triggerAnswer(index) {
         state.score += 100 + (state.isPenalty ? 0 : 20);
         setTimeout(() => showReward(), 600);
     } else {
-        playSound('bump'); block.style.background = '#555'; block.innerHTML = '💀';
+        playSound('scream'); // Страшный звук при ошибке
+        block.style.background = '#555'; block.innerHTML = '💀';
         document.querySelectorAll('.q-block').forEach(b => { if (b.dataset.correct === 'true') b.style.background = '#43b047'; });
         setTimeout(() => handlePenalty(), 800);
     }
@@ -593,7 +732,6 @@ function showReward() {
     elements.modal.classList.add('active');
     elements.mTitle.style.color = "#43b047";
 
-    // Шанс на видео/ссылку увеличен до 60% (roll > 0.4), текст 30%, монеты 10%
     if (roll < 0.30) {
         const relax = relaxBonuses[Math.floor(Math.random() * relaxBonuses.length)];
         elements.mTitle.textContent = "ОТЛИЧНО!";
@@ -616,9 +754,7 @@ function showReward() {
         elements.mText.innerHTML = media.text;
         elements.mMedia.classList.add('active');
 
-        if (media.type === 'video') {
-            elements.mMedia.innerHTML = `<iframe src="${media.url}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-        } else if (media.type === 'link') {
+        if (media.type === 'link') {
             elements.mMedia.innerHTML = `<a href="${media.url}" target="_blank" class="media-link-btn">${media.btnText || 'Открыть ссылку'}</a>`;
         }
     }
@@ -632,18 +768,11 @@ function showReward() {
 }
 
 function handlePenalty() {
-    if (state.isPenalty) { 
-        gameOver(); 
-        return; 
-    }
-    
+    if (state.isPenalty) { gameOver(); return; }
     const roll = Math.random();
-    if (roll < 0.20) { 
-        gameOver(); 
-    } 
+    if (roll < 0.20) { gameOver(); } 
     else {
         state.currentPenaltyTask = getNextPenaltyQuestion();
-        
         elements.modal.classList.add('active');
         elements.mTitle.textContent = "ШТРАФНОЕ ЗАДАНИЕ!";
         elements.mTitle.style.color = "#ff8c00";
@@ -691,7 +820,7 @@ function endGame(win) {
         elements.mTitle.style.color = "#ffd700";
         elements.mEmoji.textContent = "👑";
         elements.mEmoji.style.display = "block";
-        elements.mText.innerHTML = `Ты прошел мир «${LEVELS[state.levelIdx].name}»!<br>Счет: <b>${state.score}</b> монет.`;
+        elements.mText.innerHTML = `Ты прошел уровень «${LEVELS[state.levelIdx].name}»!<br>Счет: <b>${state.score}</b> монет.`;
         elements.mBtn.textContent = "В главное меню";
         elements.mBtn.onclick = () => {
             elements.modal.classList.remove('active');
@@ -700,11 +829,5 @@ function endGame(win) {
     }
 }
 </script>
-
-<!-- Кнопка возврата -->
-<a href="index.html" class="back-btn">↩ ВЕРНУТЬСЯ К ТРЕНАЖЕРУ</a>
-<div style="position: fixed; top: 20px; left: 20px; z-index: 999;">
-    <a href="index.html" style="background: #4f6ef7; color: white; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-family: sans-serif; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">↩ На главную</a>
-</div>
 </body>
 </html>
