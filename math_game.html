@@ -17,12 +17,13 @@
         justify-content: center;
         padding: 20px;
         color: #fff;
-        overflow: hidden;
+        overflow-x: hidden;
     }
     .container {
         max-width: 800px;
         width: 100%;
         position: relative;
+        padding-bottom: 40px;
     }
 
     /* --- Кнопка возврата --- */
@@ -42,10 +43,7 @@
         transition: 0.3s;
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .back-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateX(-5px);
-    }
+    .back-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateX(-5px); }
 
     /* --- Экран старта/конца --- */
     .screen {
@@ -79,7 +77,6 @@
         letter-spacing: 1px;
     }
     .btn:hover { background: #e67e22; transform: translateY(-3px); }
-    .btn:active { transform: translateY(0); }
 
     /* --- Игровой экран --- */
     #gameScreen {
@@ -91,32 +88,15 @@
         box-shadow: 0 15px 35px rgba(0,0,0,0.3);
     }
     
-    .top-bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 25px;
-        font-size: 18px;
-        font-weight: 700;
-    }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; font-size: 18px; font-weight: 700; }
     .lives { color: #e74c3c; letter-spacing: 2px; font-size: 22px; }
     .score { color: #f1c40f; }
     
-    .progress-bar {
-        width: 100%;
-        height: 8px;
-        background: rgba(0,0,0,0.3);
-        border-radius: 4px;
-        margin-bottom: 30px;
-        overflow: hidden;
-    }
-    .progress-fill {
-        height: 100%;
-        background: #2ecc71;
-        width: 0%;
-        transition: width 0.3s ease;
-    }
+    .progress-bar { width: 100%; height: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; margin-bottom: 30px; overflow: hidden; }
+    .progress-fill { height: 100%; background: #2ecc71; width: 0%; transition: width 0.3s ease; }
 
+    .question-wrapper { position: relative; }
+    
     .question-box {
         background: rgba(0, 0, 0, 0.2);
         padding: 25px;
@@ -133,14 +113,25 @@
         border-left: 5px solid #3498db;
     }
 
-    .options-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
+    /* Кнопка подсказки (видна только в режиме учителя) */
+    .cheat-btn {
+        display: none;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        z-index: 10;
     }
-    @media (max-width: 600px) {
-        .options-grid { grid-template-columns: 1fr; }
-    }
+    .cheat-btn:hover { background: rgba(255, 255, 255, 0.4); }
+
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
 
     .option-btn {
         background: rgba(255, 255, 255, 0.1);
@@ -155,32 +146,46 @@
         font-family: 'Montserrat', sans-serif;
         text-align: left;
     }
-    .option-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.5);
-    }
-    .option-btn.correct {
-        background: #2ecc71 !important;
-        border-color: #2ecc71 !important;
-        animation: pulse 0.5s;
-    }
-    .option-btn.wrong {
-        background: #e74c3c !important;
-        border-color: #e74c3c !important;
-        animation: shake 0.5s;
-    }
+    .option-btn:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.5); }
+    .option-btn.correct { background: #2ecc71 !important; border-color: #2ecc71 !important; animation: pulse 0.5s; }
+    .option-btn.wrong { background: #e74c3c !important; border-color: #e74c3c !important; animation: shake 0.5s; }
     .option-btn:disabled { cursor: not-allowed; opacity: 0.7; }
 
-    /* --- Анимации --- */
+    /* Таблица результатов для учителя */
+    #teacherResults {
+        display: none;
+        margin-top: 30px;
+        text-align: left;
+        background: rgba(0,0,0,0.3);
+        padding: 20px;
+        border-radius: 15px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    #teacherResults h3 { color: #f39c12; margin-bottom: 15px; font-size: 18px; }
+    .result-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 10px 0; font-size: 14px; }
+    .result-item:last-child { border-bottom: none; }
+    .res-q { font-weight: 600; margin-bottom: 5px; }
+    .res-user { color: #e74c3c; }
+    .res-correct { color: #2ecc71; }
+
+    /* Секретная кнопка */
+    .admin-toggle {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: transparent;
+        color: rgba(255,255,255,0.2);
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .admin-toggle:hover { color: rgba(255,255,255,0.8); }
+
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-    @keyframes shake { 
-        0%, 100% { transform: translateX(0); } 
-        25% { transform: translateX(-10px); } 
-        50% { transform: translateX(10px); } 
-        75% { transform: translateX(-10px); } 
-    }
-
+    @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 50% { transform: translateX(10px); } 75% { transform: translateX(-10px); } }
 </style>
 </head>
 <body>
@@ -204,10 +209,13 @@
         <div class="progress-bar">
             <div class="progress-fill" id="progressBar"></div>
         </div>
-        <div class="question-box" id="questionText">Загрузка вопроса...</div>
-        <div class="options-grid" id="optionsGrid">
-            <!-- Кнопки ответов генерируются JS -->
+        
+        <div class="question-wrapper">
+            <button class="cheat-btn" id="cheatBtn" onclick="showCheat()">👁️ Подсказка</button>
+            <div class="question-box" id="questionText">Загрузка вопроса...</div>
         </div>
+
+        <div class="options-grid" id="optionsGrid"></div>
     </div>
 
     <!-- Экран Game Over -->
@@ -216,11 +224,28 @@
         <p id="endMessage">Ты не справился...</p>
         <p style="font-size: 24px; color: #f1c40f; font-weight: bold; margin-bottom: 20px;">Твой счёт: <span id="finalScore">0</span></p>
         <button class="btn" onclick="startGame()">Попробовать снова</button>
+        
+        <!-- Блок для результатов учителя -->
+        <div id="teacherResults">
+            <h3>📊 Детальный отчет (Режим учителя)</h3>
+            <div id="resultsList"></div>
+        </div>
+    </div>
+
+    <!-- Секретная кнопка активации режима учителя -->
+    <button class="admin-toggle" onclick="toggleTeacherMode()">•</button>
+
+    <!-- Подпись Черной Королевы -->
+    <div style="text-align: center; margin-top: 30px; opacity: 0.7; font-style: italic; font-size: 14px; color: #ccc; letter-spacing: 1px;">
+        <span style="color: #8e44ad; font-size: 18px;">♛</span> Yes, yes, my daughter-in-law. Learn. <span style="color: #8e44ad; font-size: 18px;">♛</span>
     </div>
 </div>
 
 <script>
-    // База вопросов для игры (вопрос, варианты, правильный индекс)
+    const SECRET_PASSWORD = "admin"; // Пароль для режима учителя
+    let isTeacherMode = false;
+    let gameLog = []; // Здесь храним историю ответов
+
     const gameQuestions = [
         { q: "Как сложить две дроби с разными знаменателями?", options: ["Сложить числители и знаменатели", "Привести к общему знаменателю", "Умножить всё на 2", "Перевести в проценты"], correct: 1 },
         { q: "Формула площади прямоугольника.", options: ["S = a + b", "S = 2 * (a + b)", "S = a * b", "S = a^2"], correct: 2 },
@@ -250,10 +275,7 @@
     let lives = 3;
     let canAnswer = true;
 
-    // Перемешивание массива
-    function shuffle(array) {
-        return array.sort(() => Math.random() - 0.5);
-    }
+    function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
 
     function startGame() {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -264,14 +286,15 @@
         score = 0;
         lives = 3;
         canAnswer = true;
+        gameLog = []; // Очищаем лог при новом старте
         
+        document.getElementById('teacherResults').style.display = 'none'; // Скрываем отчет
         updateUI();
         loadQuestion();
     }
 
     function loadQuestion() {
         if (currentIndex >= currentQuestions.length) {
-            // Победа (если дошел до конца)
             endGame(true);
             return;
         }
@@ -279,71 +302,67 @@
         const questionData = currentQuestions[currentIndex];
         document.getElementById('questionText').innerText = questionData.q;
         
-        // Перемешиваем варианты ответов
+        // Показываем кнопку подсказки, если включен режим учителя
+        document.getElementById('cheatBtn').style.display = isTeacherMode ? 'block' : 'none';
+
         const optionsWithIndex = questionData.options.map((opt, index) => ({ text: opt, originalIndex: index }));
         const shuffledOptions = shuffle(optionsWithIndex);
 
         const optionsGrid = document.getElementById('optionsGrid');
         optionsGrid.innerHTML = '';
 
-        shuffledOptions.forEach((opt, index) => {
+        shuffledOptions.forEach((opt) => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
             btn.innerText = opt.text;
-            btn.onclick = () => checkAnswer(btn, opt.originalIndex === questionData.correct);
+            btn.onclick = () => checkAnswer(btn, opt.originalIndex === questionData.correct, opt.text, questionData);
             optionsGrid.appendChild(btn);
         });
 
-        // Обновляем прогресс-бар
         const progress = (currentIndex / currentQuestions.length) * 100;
         document.getElementById('progressBar').style.width = `${progress}%`;
     }
 
-    function checkAnswer(btn, isCorrect) {
+    function checkAnswer(btn, isCorrect, userAnswerText, questionData) {
         if (!canAnswer) return;
         canAnswer = false;
 
+        // Записываем в лог
+        gameLog.push({
+            question: questionData.q,
+            userAnswer: userAnswerText,
+            correctAnswer: questionData.options[questionData.correct],
+            isCorrect: isCorrect
+        });
+
         const allBtns = document.querySelectorAll('.option-btn');
         allBtns.forEach(b => b.disabled = true);
+        document.getElementById('cheatBtn').style.display = 'none'; // Прячем подсказку
 
         if (isCorrect) {
             btn.classList.add('correct');
             score += 100;
             document.getElementById('scoreDisplay').innerText = `Очки: ${score}`;
-            
-            // Следующий вопрос через 1 секунду
-            setTimeout(() => {
-                currentIndex++;
-                canAnswer = true;
-                loadQuestion();
-            }, 1000);
+            setTimeout(() => { currentIndex++; canAnswer = true; loadQuestion(); }, 1000);
         } else {
             btn.classList.add('wrong');
             lives--;
             updateLives();
             
-            // Подсветить правильный ответ
             allBtns.forEach(b => {
-                // Находим правильный ответ через данные текущего вопроса
-                const correctText = currentQuestions[currentIndex].options[currentQuestions[currentIndex].correct];
-                if (b.innerText === correctText) b.classList.add('correct');
+                if (b.innerText === questionData.options[questionData.correct]) b.classList.add('correct');
             });
 
             if (lives <= 0) {
                 setTimeout(() => endGame(false), 1500);
             } else {
-                setTimeout(() => {
-                    currentIndex++;
-                    canAnswer = true;
-                    loadQuestion();
-                }, 2000);
+                setTimeout(() => { currentIndex++; canAnswer = true; loadQuestion(); }, 2000);
             }
         }
     }
 
     function updateLives() {
-        const livesDisplay = document.getElementById('livesDisplay');
-        livesDisplay.innerText = '❤️'.repeat(lives) + '🖤'.repeat(3 - lives);
+        document.getElementById('livesDisplay').innerText = '❤️'.repeat(lives) + '🖤'.repeat(3 - lives);
     }
 
     function updateUI() {
@@ -360,12 +379,81 @@
         if (isWin) {
             document.getElementById('endTitle').innerText = "ПОБЕДА!";
             document.getElementById('endTitle').style.color = "#2ecc71";
-            document.getElementById('endMessage').innerText = "Ты сдал зачёт и спас свой класс! Училка в шоке, директор доволен.";
+            document.getElementById('endMessage').innerText = "Ты сдал зачёт и спас свой класс!";
         } else {
             document.getElementById('endTitle').innerText = "GAME OVER";
             document.getElementById('endTitle').style.color = "#e74c3c";
-            document.getElementById('endMessage').innerText = "Ты потерял все жизни. Директор ждёт тебя в кабинете... Попробуй еще раз!";
+            document.getElementById('endMessage').innerText = "Ты потерял все жизни. Директор ждёт тебя...";
         }
+
+        // Если включен режим учителя - показываем отчет
+        if (isTeacherMode) {
+            renderTeacherResults();
+        }
+    }
+
+    // --- ФУНКЦИИ РЕЖИМА УЧИТЕЛЯ ---
+
+    function toggleTeacherMode() {
+        if (isTeacherMode) {
+            isTeacherMode = false;
+            alert("Режим учителя выключен.");
+            document.getElementById('cheatBtn').style.display = 'none';
+            document.getElementById('teacherResults').style.display = 'none';
+            return;
+        }
+
+        const pass = prompt("Введите код учителя для просмотра ответов:");
+        if (pass === SECRET_PASSWORD) {
+            isTeacherMode = true;
+            alert("Режим учителя АКТИВИРОВАН. Вам доступны подсказки и отчеты.");
+            if (document.getElementById('gameScreen').classList.contains('active')) {
+                document.getElementById('cheatBtn').style.display = 'block';
+            }
+        } else if (pass !== null) {
+            alert("Неверный код!");
+        }
+    }
+
+    function showCheat() {
+        if (!isTeacherMode) return;
+        const questionData = currentQuestions[currentIndex];
+        const allBtns = document.querySelectorAll('.option-btn');
+        
+        // Подсвечиваем правильный ответ зеленым на 2 секунды
+        allBtns.forEach(b => {
+            if (b.innerText === questionData.options[questionData.correct]) {
+                b.style.borderColor = '#2ecc71';
+                b.style.background = 'rgba(46, 204, 113, 0.3)';
+                setTimeout(() => {
+                    b.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                    b.style.background = 'rgba(255, 255, 255, 0.1)';
+                }, 2000);
+            }
+        });
+    }
+
+    function renderTeacherResults() {
+        const resContainer = document.getElementById('teacherResults');
+        const listContainer = document.getElementById('resultsList');
+        listContainer.innerHTML = '';
+        
+        if (gameLog.length === 0) {
+            listContainer.innerHTML = '<p>Нет данных об игре.</p>';
+        } else {
+            gameLog.forEach((log, index) => {
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.innerHTML = `
+                    <div class="res-q">${index + 1}. ${log.question}</div>
+                    <div>Ответ игрока: <span class="${log.isCorrect ? 'res-correct' : 'res-user'}">${log.userAnswer} ${log.isCorrect ? '✅' : '❌'}</span></div>
+                    ${!log.isCorrect ? `<div>Правильный ответ: <span class="res-correct">${log.correctAnswer}</span></div>` : ''}
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+        
+        resContainer.style.display = 'block';
     }
 </script>
 
