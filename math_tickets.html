@@ -201,11 +201,16 @@
         <input type="text" class="search-box" id="searchInput" placeholder="Поиск по номеру билета (от 1 до 1500)..." oninput="filterTickets()">
         <div class="grid" id="ticketsGrid"></div>
     </div>
+
+    <!-- Подпись Черной Королевы -->
+    <div style="text-align: center; margin-top: 50px; margin-bottom: 20px; opacity: 0.7; font-style: italic; font-size: 14px; color: #ccc; letter-spacing: 1px;">
+        <span style="color: #8e44ad; font-size: 18px;">♛</span> Yes, yes, my daughter-in-law. Learn. <span style="color: #8e44ad; font-size: 18px;">♛</span>
+    </div>
 </div>
 
 <script>
     // ПАРОЛЬ ДЛЯ ДОСТУПА К БАЗЕ
-    const SECRET_PASSWORD = "Kir23:55";
+    const SECRET_PASSWORD = "admin";
 
     // Расширенная база вопросов (Арифметика, Алгебра, Геометрия 5-7 класс)
     const questionPool = [
@@ -310,11 +315,9 @@
         { q: "Что такое окружность?", a: "Геометрическое место точек, равноудаленных от данной точки (центра)." }
     ];
 
-    // Генерация 1500 билетов со случайным выбором
     const numTickets = 1500;
     const tickets = [];
     
-    // Функция для перемешивания массива (Fisher-Yates)
     function shuffle(array) {
         let currentIndex = array.length, randomIndex;
         while (currentIndex != 0) {
@@ -325,23 +328,14 @@
         return array;
     }
 
-    // Генерируем билеты
     for (let i = 0; i < numTickets; i++) {
-        // Делаем копию пула и перемешиваем её, чтобы взять 3 уникальных вопроса
         let poolCopy = shuffle([...questionPool]);
-        
-        // Берем первые 3 вопроса из перемешанного списка
-        const q1 = poolCopy[0];
-        const q2 = poolCopy[1];
-        const q3 = poolCopy[2];
-        
         tickets.push({
             id: i + 1,
-            questions: [q1, q2, q3]
+            questions: [poolCopy[0], poolCopy[1], poolCopy[2]]
         });
     }
 
-    // Функция для отрисовки сетки всех билетов (вызывается только после ввода пароля)
     function renderGrid(filterText = '') {
         const grid = document.getElementById('ticketsGrid');
         grid.innerHTML = '';
@@ -366,7 +360,6 @@
         });
     }
 
-    // Функция вытягивания случайного билета
     function drawRandom() {
         const randomIndex = Math.floor(Math.random() * tickets.length);
         const ticket = tickets[randomIndex];
@@ -392,7 +385,6 @@
         document.getElementById('activeTicket').style.display = 'block';
     }
 
-    // Показать/скрыть ответы в активном билете
     function toggleAnswer() {
         const ansDiv = document.getElementById('activeAnswer');
         const btn = document.querySelector('.btn-show-ans');
@@ -405,13 +397,11 @@
         }
     }
 
-    // Поиск по номеру билета
     function filterTickets() {
         const searchValue = document.getElementById('searchInput').value;
         renderGrid(searchValue);
     }
 
-    // Секретная функция для открытия панели учителя
     function toggleAdmin() {
         const adminPanel = document.getElementById('adminPanel');
         
@@ -424,7 +414,7 @@
         
         if (pass === SECRET_PASSWORD) {
             adminPanel.style.display = 'block';
-            renderGrid(); // Загружаем билеты
+            renderGrid();
             adminPanel.scrollIntoView({ behavior: 'smooth' });
         } else if (pass !== null) {
             alert("Неверный код! Доступ запрещен.");
