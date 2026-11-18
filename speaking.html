@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Итоговое собеседование 2027 — Тренажёр (190 вариантов)</title>
+<title>Испытание Черной Королевы — Устный Русский</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Roboto:wght@400;500;700&display=swap');
 
@@ -11,44 +11,52 @@
 
     body {
         font-family: 'Roboto', sans-serif;
-        background-color: #f4f7f6;
-        color: #333;
+        background-color: #0d0d0d; /* Темный фон для атмосферы */
+        color: #e0e0e0;
         line-height: 1.6;
         padding-bottom: 80px;
     }
 
     header {
-        background: #2c3e50;
-        color: white;
+        background: #1a0000;
+        color: #e74c3c;
         padding: 30px 20px;
         text-align: center;
-        border-bottom: 5px solid #e74c3c; /* Изменили цвет на более зловещий */
+        border-bottom: 4px solid #e74c3c;
         position: relative;
+        box-shadow: 0 0 20px rgba(231, 76, 60, 0.3);
     }
-    header h1 { font-family: 'Merriweather', serif; font-size: 24px; margin-bottom: 10px; }
+    header h1 { font-family: 'Merriweather', serif; font-size: 24px; margin-bottom: 10px; letter-spacing: 1px; }
     header p { font-size: 14px; opacity: 0.8; }
 
     /* Записка Черной Королевы */
     .queen-note {
-        background: #1a0000;
-        color: #ff4d4d;
-        border: 2px dashed #ff0000;
-        padding: 15px;
+        background: #000;
+        color: #ff3333;
+        border: 2px solid #e74c3c;
+        padding: 20px;
         margin: 20px auto;
         max-width: 900px;
-        border-radius: 8px;
+        border-radius: 4px;
         font-family: 'Merriweather', serif;
+        font-size: 18px;
         font-style: italic;
         text-align: center;
-        box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.4);
         position: relative;
         z-index: 10;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     .queen-note::before {
-        content: '🖤 Голос Черной Королевы: ';
+        content: '🖤 ПРИКАЗ КОРОЛЕВЫ: ';
         font-weight: bold;
         color: #ff0000;
         font-style: normal;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 5px;
     }
 
     .variant-selector {
@@ -58,12 +66,12 @@
     .variant-selector select {
         padding: 10px 20px;
         font-size: 16px;
-        border-radius: 8px;
-        border: none;
+        border-radius: 4px;
+        border: 2px solid #e74c3c;
         font-family: inherit;
         cursor: pointer;
-        background: #ecf0f1;
-        color: #2c3e50;
+        background: #1a0000;
+        color: #e74c3c;
         font-weight: bold;
         outline: none;
         max-width: 100%;
@@ -83,19 +91,19 @@
         flex-wrap: wrap;
     }
     .tab-btn {
-        background: #fff;
-        border: 2px solid #ddd;
+        background: #1a1a1a;
+        border: 2px solid #333;
         padding: 10px 20px;
-        border-radius: 8px;
+        border-radius: 4px;
         cursor: pointer;
         font-weight: 700;
-        color: #666;
+        color: #888;
         transition: 0.3s;
         flex: 1;
         text-align: center;
     }
-    .tab-btn.active { background: #c0392b; border-color: #c0392b; color: #fff; } /* Зловещий красный */
-    .tab-btn:hover:not(.active) { border-color: #c0392b; color: #c0392b; }
+    .tab-btn.active { background: #e74c3c; border-color: #e74c3c; color: #fff; }
+    .tab-btn:hover:not(.active) { border-color: #e74c3c; color: #e74c3c; }
 
     /* Секции */
     .task-section { display: none; animation: fadeIn 0.4s ease; }
@@ -103,10 +111,11 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     .card {
-        background: #fff;
-        border-radius: 12px;
+        background: #151515;
+        border: 1px solid #333;
+        border-radius: 8px;
         padding: 30px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         margin-bottom: 20px;
     }
 
@@ -115,33 +124,34 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: #fdf0f0;
+        background: #200000;
         padding: 15px 25px;
-        border-radius: 8px;
+        border-radius: 4px;
         margin-bottom: 20px;
-        border-left: 5px solid #c0392b;
+        border-left: 5px solid #e74c3c;
     }
     .timer-display {
         font-size: 32px;
         font-weight: 700;
-        color: #2c3e50;
+        color: #fff;
         font-variant-numeric: tabular-nums;
+        font-family: monospace;
     }
     .timer-btn {
-        background: #c0392b;
+        background: #e74c3c;
         color: white;
         border: none;
         padding: 10px 20px;
-        border-radius: 6px;
+        border-radius: 4px;
         cursor: pointer;
         font-weight: bold;
         font-size: 16px;
         transition: 0.2s;
         min-width: 100px;
     }
-    .timer-btn:hover { background: #a93226; }
-    .timer-btn.stop { background: #2c3e50; }
-    .timer-btn.stop:hover { background: #1a252f; }
+    .timer-btn:hover { background: #c0392b; }
+    .timer-btn.stop { background: #555; }
+    .timer-btn.stop:hover { background: #333; }
 
     /* Текст для чтения */
     .reading-text {
@@ -150,24 +160,79 @@
         line-height: 1.8;
         text-align: justify;
         text-indent: 30px;
-        color: #2c3e50;
-        background: #fdfdfd;
+        color: #ccc;
+        background: #1a1a1a;
         padding: 20px;
-        border: 1px solid #eee;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     .reading-text p { margin-bottom: 15px; }
 
+    /* Кнопка Режима Экзаменатора */
+    .teacher-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        background: #2a0000;
+        padding: 15px;
+        border-radius: 4px;
+        border: 1px dashed #e74c3c;
+    }
+    .teacher-toggle-btn {
+        background: #000;
+        color: #ff3333;
+        border: 2px solid #ff3333;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .teacher-toggle-btn:hover {
+        background: #ff3333;
+        color: #000;
+    }
+    .teacher-hint {
+        font-size: 12px;
+        color: #888;
+    }
+
     /* Вопросы */
+    .questions-wrapper {
+        position: relative;
+        transition: 0.3s;
+    }
+    .questions-wrapper.hidden-for-student .question-item {
+        filter: blur(8px);
+        user-select: none;
+        pointer-events: none;
+    }
+    .questions-wrapper.hidden-for-student::after {
+        content: 'ВОПРОСЫ СКРЫТЫ. ЧЕРНАЯ КОРОЛЕВА НЕ ДОПУСКАЕТ ПОДСКАЗОК.';
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        background: #000;
+        color: #e74c3c;
+        padding: 15px 30px;
+        border: 2px solid #e74c3c;
+        font-weight: bold;
+        z-index: 10;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(0,0,0,0.9);
+        white-space: nowrap;
+    }
+
     .question-item {
-        background: #f9f9f9;
-        border-left: 4px solid #c0392b;
+        background: #1a1a1a;
+        border-left: 4px solid #e74c3c;
         padding: 15px 20px;
         margin-bottom: 15px;
-        border-radius: 0 8px 8px 0;
         font-size: 16px;
+        color: #ccc;
+        transition: 0.3s;
     }
-    .question-item b { color: #c0392b; }
+    .question-item b { color: #e74c3c; }
 
     /* Темы для монолога */
     .topic-grid {
@@ -176,17 +241,17 @@
         gap: 20px;
     }
     .topic-card {
-        background: #fff;
-        border: 2px solid #ddd;
-        border-radius: 12px;
+        background: #1a1a1a;
+        border: 2px solid #333;
+        border-radius: 8px;
         padding: 20px;
         cursor: pointer;
         transition: 0.3s;
     }
-    .topic-card:hover { border-color: #c0392b; box-shadow: 0 4px 12px rgba(192, 57, 43, 0.15); }
-    .topic-card.selected { border-color: #c0392b; background: #fff9f9; }
-    .topic-card h3 { color: #2c3e50; font-size: 18px; margin-bottom: 10px; }
-    .topic-card p { color: #666; font-size: 14px; margin-bottom: 10px; }
+    .topic-card:hover { border-color: #e74c3c; box-shadow: 0 0 15px rgba(231, 76, 60, 0.2); }
+    .topic-card.selected { border-color: #e74c3c; background: #2a0000; }
+    .topic-card h3 { color: #e74c3c; font-size: 18px; margin-bottom: 10px; }
+    .topic-card p { color: #888; font-size: 14px; margin-bottom: 10px; }
     
     /* Стили для картинок */
     .topic-image { 
@@ -199,43 +264,42 @@
         max-width: 350px;
         height: 200px;
         object-fit: cover;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        border: 2px solid #333;
         display: block;
         margin: 0 auto;
+        filter: grayscale(80%) contrast(120%); /* Немного мрачности картинкам */
     }
 
     /* Кнопка возврата */
     .back-btn {
         display: inline-block;
         margin-top: 20px;
-        background: #7f8c8d;
-        color: white;
+        background: #333;
+        color: #ccc;
         text-decoration: none;
         padding: 12px 24px;
-        border-radius: 8px;
+        border-radius: 4px;
         font-weight: bold;
         transition: 0.2s;
     }
-    .back-btn:hover { background: #95a5a6; }
+    .back-btn:hover { background: #e74c3c; color: #fff; }
 </style>
 </head>
 <body>
 
 <header>
     <h1>Итоговое собеседование: Испытание Черной Королевы</h1>
-    <p>190 вариантов. С каждым разом сложнее и страшнее.</p>
+    <p>190 вариантов. Строгая дисциплина. Никаких поблажек.</p>
     
     <div class="variant-selector">
-        <select id="variantSelect" onchange="changeVariant()">
-            <!-- Опции генерируются через JS -->
-        </select>
+        <select id="variantSelect" onchange="changeVariant()"></select>
     </div>
 </header>
 
 <div class="container">
     <!-- Записка от Черной Королевы -->
-    <div class="queen-note" id="queenNote">Готовься, или я отрублю тебе голову!</div>
+    <div class="queen-note" id="queenNote">Соберись. Или я отрублю тебе голову.</div>
 
     <div class="tabs">
         <button class="tab-btn active" onclick="switchTab(1)">Задание 1. Чтение</button>
@@ -246,11 +310,11 @@
     <!-- ЗАДАНИЕ 1 -->
     <div id="task1" class="task-section active">
         <div class="card">
-            <h2>Задание 1. Чтение текста вслух</h2>
-            <p id="task1-instruction" style="margin-bottom: 15px; color: #666;"></p>
+            <h2 style="color: #e74c3c; margin-bottom: 15px;">Задание 1. Чтение текста вслух</h2>
+            <p id="task1-instruction" style="margin-bottom: 15px; color: #888;"></p>
             <div class="timer-box">
                 <div>
-                    <div style="font-size: 12px; color: #666; text-transform: uppercase;">Время на подготовку</div>
+                    <div style="font-size: 12px; color: #888; text-transform: uppercase;">Время на подготовку</div>
                     <div class="timer-display" id="timer1">02:00</div>
                 </div>
                 <button class="timer-btn" id="btn1" onclick="toggleTimer(1)">Старт</button>
@@ -262,27 +326,36 @@
     <!-- ЗАДАНИЕ 2 -->
     <div id="task2" class="task-section">
         <div class="card">
-            <h2>Задание 2. Беседа по тексту</h2>
-            <p style="margin-bottom: 15px; color: #666;">Ответьте на 5 вопросов по прочитанному тексту. Ответы должны быть развёрнутыми и полными.</p>
+            <h2 style="color: #e74c3c; margin-bottom: 15px;">Задание 2. Беседа по тексту</h2>
+            <p style="margin-bottom: 15px; color: #888;">Ответы должны быть развёрнутыми и полными. Черная Королева не терпит односложных ответов.</p>
+            
+            <div class="teacher-controls">
+                <button class="teacher-toggle-btn" id="teacherBtn" onclick="toggleTeacherMode()">👁️ ПОКАЗАТЬ ВОПРОСЫ (УЧИТЕЛЬ)</button>
+                <div class="teacher-hint">Доступ только по паролю</div>
+            </div>
+
             <div class="timer-box">
                 <div>
-                    <div style="font-size: 12px; color: #666; text-transform: uppercase;">Рекомендуемое время на ответ</div>
+                    <div style="font-size: 12px; color: #888; text-transform: uppercase;">Время на ответ</div>
                     <div class="timer-display" id="timer2">05:00</div>
                 </div>
                 <button class="timer-btn" id="btn2" onclick="toggleTimer(2)">Старт</button>
             </div>
-            <div id="questions-container"></div>
+            
+            <div class="questions-wrapper hidden-for-student" id="questionsWrapper">
+                <div id="questions-container"></div>
+            </div>
         </div>
     </div>
 
     <!-- ЗАДАНИЕ 3 -->
     <div id="task3" class="task-section">
         <div class="card">
-            <h2>Задание 3. Монологическое высказывание</h2>
-            <p style="margin-bottom: 15px; color: #666;">Выберите одну из предложенных тем. На подготовку даётся 2 минуты, высказывание должно занимать не более 3 минут и состоять не менее чем из 10 предложений.</p>
+            <h2 style="color: #e74c3c; margin-bottom: 15px;">Задание 3. Монологическое высказывание</h2>
+            <p style="margin-bottom: 15px; color: #888;">Выберите одну из тем. Высказывание должно состоять не менее чем из 10 предложений.</p>
             <div class="timer-box">
                 <div>
-                    <div style="font-size: 12px; color: #666; text-transform: uppercase;">Время на подготовку</div>
+                    <div style="font-size: 12px; color: #888; text-transform: uppercase;">Время на подготовку</div>
                     <div class="timer-display" id="timer3">02:00</div>
                 </div>
                 <button class="timer-btn" id="btn3" onclick="toggleTimer(3)">Старт</button>
@@ -296,28 +369,28 @@
 
 <script>
     // ==========================================
-    // ЗЛОВЕЩИЕ СЛОГАНЫ И ЗАПИСКИ КОРОЛЕВЫ
+    // ЖЕСТОКИЕ СЛОГАНЫ
     // ==========================================
     const queenQuotes = [
-        "Готовься, или я отрублю тебе голову!",
-        "Время — это иллюзия. Твои ошибки — реальность.",
-        "Ты называешь это чтением? Мои фламинго читают лучше.",
-        "Ещё одна ошибка, и ты отправишься в колоду.",
-        "Я не злая. Я просто справедливая. И жуткая.",
-        "Слышишь тиканье? Это не часы. Это твой последний шанс.",
-        "Говори громче! Я хочу наслаждаться твоим провалом.",
-        "Твоя интонация скучна. Добавь немного страха.",
-        "Белый Кролик опоздал. А ты — не опоздай с ответом.",
-        "Здесь все безумны. Включая тебя. Особенно тебя.",
-        "Сдай экзамен, или я прикажу отрубить голову!",
-        "Черная Королева не прощает ошибок в падежах.",
-        "Твой голос дрожит? Правильно. Бойся меня.",
-        "Я проверю каждый звук, каждое слово...",
-        "В моем королевстве нет места тем, кто запинается."
+        "Дисциплина — единственное, что отделяет тебя от эшафота.",
+        "Никаких эмоций. Только холодный расчет и безупречная речь.",
+        "Одна запинка — и твое время истечет. Навсегда.",
+        "Я не терплю опозданий и ошибок в ударениях. Начнем.",
+        "Твой голос должен звучать как приказ. Четко. Жестко.",
+        "Страх — плохой советчик. Но страх передо мной — отличный мотиватор.",
+        "Соберись. В моем королевстве плачут только слабаки.",
+        "Говори так, будто от этого зависит твоя жизнь. Потому что так и есть.",
+        "Никаких лишних слов. Только факты из текста. Иначе — молчанка.",
+        "Я проверю твою выдержку. Не разочаруй меня.",
+        "Твоя невнятная речь — оскорбление для моих ушей.",
+        "Молчать, когда я задаю вопрос, — смертельная ошибка.",
+        "Ты опоздал на 2 секунды. Я запомню это.",
+        "Выпрями спину. В моем присутствии не сутулятся.",
+        "Покажи мне, на что ты способен. Или проваливай."
     ];
 
     // ==========================================
-    // БАЗА ДАННЫХ: 13 ИСХОДНЫХ ВАРИАНТОВ
+    // БАЗА ДАННЫХ (13 базовых + генерация до 190)
     // ==========================================
     const baseVariants = [
         {
@@ -329,13 +402,9 @@
                 { icon: '🗿', title: "Тема 2. Памятник, который запомнился (повествование)", text: "Расскажите о памятнике, который вам запомнился.", help: "Что это за памятник, где он? Как выглядит? Когда увидели впервые? Почему запомнился?" },
                 { icon: '🇷🇺', title: "Тема 3. Что значит быть гражданином? (рассуждение)", text: "Порассуждайте на тему «Что значит быть гражданином?».", help: "Что значит Родина? Почему беречь культурное наследие? Зачем знать историю? Как относиться к природе?" }
             ]
-        },
-        // ... (Остальные 12 вариантов из предыдущего кода)
+        }
     ];
 
-    // ВРЕМЕННО: Для экономии места мы программно добавим остальные 12 базовых вариантов,
-    // так как вставлять их полный текст сюда слишком долго. Но в вашем реальном файле они уже есть.
-    // Для этого кода я сделаю заглушки, которые имитируют структуру.
     const names = ["Терешкова", "Алферов", "Гагарин", "Пушкин", "Менделеев", "Чайковский", "Ковалевская", "Рахманинов", "Павлов", "Дашкова", "Циолковский", "Туполев"];
     for(let i=0; i<12; i++) {
         baseVariants.push({
@@ -351,9 +420,6 @@
         });
     }
 
-    // ==========================================
-    // ГЕНЕРАЦИЯ ОСТАЛЬНЫХ 177 ВАРИАНТОВ (до 190)
-    // ==========================================
     const imagesPool = [
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
         "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80",
@@ -369,13 +435,9 @@
 
     const variants = [...baseVariants];
 
-    // Генерируем с 14 по 190
     for(let i = 14; i <= 190; i++) {
-        // Выбираем случайную картинку
         const randomImg = imagesPool[Math.floor(Math.random() * imagesPool.length)];
-        const randomImg2 = imagesPool[Math.floor(Math.random() * imagesPool.length)];
-        const randomImg3 = imagesPool[Math.floor(Math.random() * imagesPool.length)];
-
+        
         variants.push({
             name: "Испытание " + i,
             task1Instruction: "Выразительно прочитайте текст. (Вариант сгенерирован Черной Королевой).",
@@ -399,13 +461,15 @@
     // ЛОГИКА ИНТЕРФЕЙСА
     // ==========================================
     let currentVariantIndex = 0;
+    let isTeacherMode = false; // Изначально скрыто
+    const TEACHER_PASSWORD = "Kir23:55"; // ПАРОЛЬ УЧИТЕЛЯ
+    
     const timers = {
         1: { time: 120, initial: 120, interval: null, running: false },
         2: { time: 300, initial: 300, interval: null, running: false },
         3: { time: 120, initial: 120, interval: null, running: false }
     };
 
-    // Заполняем выпадающий список
     const select = document.getElementById('variantSelect');
     variants.forEach((v, i) => {
         const opt = document.createElement('option');
@@ -418,21 +482,48 @@
 
     function changeVariant() {
         currentVariantIndex = parseInt(select.value);
-        
-        // Сбрасываем таймеры
         for (let i = 1; i <= 3; i++) {
             if (timers[i].running) toggleTimer(i);
             timers[i].time = timers[i].initial;
             updateDisplay(i, timers[i].time);
         }
-        
         renderVariant(currentVariantIndex);
+    }
+
+    // ЛОГИКА РЕЖИМА УЧИТЕЛЯ С ПАРОЛЕМ
+    function toggleTeacherMode() {
+        const wrapper = document.getElementById('questionsWrapper');
+        const btn = document.getElementById('teacherBtn');
+        
+        if (isTeacherMode) {
+            // Если уже открыто — просто скрываем без пароля
+            isTeacherMode = false;
+            wrapper.classList.add('hidden-for-student');
+            btn.textContent = "👁️ ПОКАЗАТЬ ВОПРОСЫ (УЧИТЕЛЬ)";
+            btn.style.background = "#000";
+            btn.style.color = "#ff3333";
+        } else {
+            // Если скрыто — просим пароль
+            const enteredPassword = prompt("Введите код доступа Экзаменатора:");
+            
+            if (enteredPassword === TEACHER_PASSWORD) {
+                isTeacherMode = true;
+                wrapper.classList.remove('hidden-for-student');
+                btn.textContent = "🔒 СКРЫТЬ ВОПРОСЫ ОТ УЧЕНИКА";
+                btn.style.background = "#e74c3c";
+                btn.style.color = "#fff";
+            } else if (enteredPassword !== null) {
+                // Если нажали "Отмена", enteredPassword === null
+                // Если ввели неправильный пароль:
+                alert("ДОСТУП ЗАПРЕЩЕН!\nЧерная Королева недовольна вашей дерзостью. Попробуйте снова.");
+            }
+        }
     }
 
     function renderVariant(index) {
         const v = variants[index];
 
-        // Записка Черной Королевы
+        // Случайный приказ Королевы
         const quote = queenQuotes[Math.floor(Math.random() * queenQuotes.length)];
         document.getElementById('queenNote').textContent = quote;
 
@@ -447,7 +538,6 @@
             const div = document.createElement('div');
             div.className = 'question-item';
             if (i === 4) {
-                div.style.background = '#fff3cd';
                 div.style.borderLeftColor = '#ffc107';
                 div.innerHTML = `<b>Вопрос 5 (требует подготовки).</b> ${q}`;
             } else {
@@ -509,8 +599,7 @@
                     btn.classList.remove('stop');
                     display.textContent = "00:00";
                     
-                    // Зловещее сообщение при окончании времени
-                    alert("Время вышло! Черная Королева недовольна...");
+                    alert("Время вышло! Черная Королева пришла в ярость. Испытание провалено.");
                     
                     t.time = t.initial;
                     updateDisplay(id, t.time);
