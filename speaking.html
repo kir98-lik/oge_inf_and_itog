@@ -11,7 +11,7 @@
 
     body {
         font-family: 'Roboto', sans-serif;
-        background-color: #0d0d0d; /* Темный фон для атмосферы */
+        background-color: #0d0d0d;
         color: #e0e0e0;
         line-height: 1.6;
         padding-bottom: 80px;
@@ -262,13 +262,17 @@
     .topic-image img {
         width: 100%;
         max-width: 350px;
-        height: 200px;
+        height: 220px;
         object-fit: cover;
         border-radius: 8px;
         border: 2px solid #333;
         display: block;
         margin: 0 auto;
-        filter: grayscale(80%) contrast(120%); /* Немного мрачности картинкам */
+        filter: grayscale(80%) contrast(120%); /* Мрачный стиль */
+        transition: 0.3s;
+    }
+    .topic-card:hover .topic-image img {
+        filter: grayscale(30%) contrast(100%);
     }
 
     /* Кнопка возврата */
@@ -390,7 +394,47 @@
     ];
 
     // ==========================================
-    // БАЗА ДАННЫХ (13 базовых + генерация до 190)
+    // КУРАТОРСКИЕ ПУЛЫ КАРТИНОК ДЛЯ ЗАДАНИЯ 3
+    // ==========================================
+    const professionsPool = [
+        { title: "Пилот", img: "https://images.unsplash.com/photo-1583500178450-e59e4309b57a?auto=format&fit=crop&w=500&q=80" },
+        { title: "Врач", img: "https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=500&q=80" },
+        { title: "Пожарный", img: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=500&q=80" },
+        { title: "Полицейский", img: "https://images.unsplash.com/photo-1589227176115-e6d02c9f0b16?auto=format&fit=crop&w=500&q=80" },
+        { title: "Учитель", img: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=500&q=80" },
+        { title: "Инженер", img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=500&q=80" },
+        { title: "Программист", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80" },
+        { title: "Музыкант", img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80" },
+        { title: "Ветеринар", img: "https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=500&q=80" },
+        { title: "Архитектор", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=500&q=80" }
+    ];
+
+    const narrativesPool = [
+        { title: "Памятник", img: "https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?auto=format&fit=crop&w=500&q=80" },
+        { title: "Книга", img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=500&q=80" },
+        { title: "Путешествие", img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=500&q=80" },
+        { title: "Любимое место в городе", img: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=500&q=80" },
+        { title: "Музей", img: "https://images.unsplash.com/photo-1564399579883-451a5d44ec08?auto=format&fit=crop&w=500&q=80" },
+        { title: "Фильм", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=500&q=80" },
+        { title: "Домашний питомец", img: "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=500&q=80" },
+        { title: "Школьная олимпиада", img: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=500&q=80" }
+    ];
+
+    const conceptsPool = [
+        { title: "Гражданин", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=500&q=80" },
+        { title: "Дружба", img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=500&q=80" },
+        { title: "Цель в жизни", img: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=500&q=80" },
+        { title: "Талант", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" },
+        { title: "Образование", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=500&q=80" },
+        { title: "Ответственность", img: "https://images.unsplash.com/photo-1507925921958-8a62f3d1a50d?auto=format&fit=crop&w=500&q=80" },
+        { title: "Мечта", img: "https://images.unsplash.com/photo-1454789548928-9efd52dc4031?auto=format&fit=crop&w=500&q=80" },
+        { title: "Классическая литература", img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=500&q=80" },
+        { title: "Полезные привычки", img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=500&q=80" },
+        { title: "Настоящее искусство", img: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=500&q=80" }
+    ];
+
+    // ==========================================
+    // БАЗА ДАННЫХ: 13 ИСХОДНЫХ ВАРИАНТОВ
     // ==========================================
     const baseVariants = [
         {
@@ -398,46 +442,44 @@
             text: `<p>Валерий Абисалович Гергиев – известный российский дирижёр. Он вырос в Северной Осетии, с детства увлекался музыкой, обладал уникальным слухом. Ещё будучи студентом консерватории, одарённый музыкант становился победителем престижных конкурсов дирижёров.</p><p>Талант этого музыканта восхищает публику. Его дирижёрское искусство характеризуется эмоциональностью и яркой индивидуальностью.</p><p>Валерий Гергиев работал с разными симфоническими оркестрами. Более 30 лет он служит бессменным художественным руководителем Мариинского театра в Санкт-Петербурге. Труппа даёт в год более 700 спектаклей, гастролирует по всему миру. Благодаря Гергиеву репертуар театра расширяется, на сцене появляются молодые талантливые исполнители, звучит музыка современных композиторов. Музыкант является учредителем благотворительного фонда, который помогает развитию театра. Валерий Гергиев возглавляет жюри многих музыкальных конкурсов и фестивалей. Заслуги дирижёра отмечены многочисленными наградами.</p><p>Валерий Гергиев уверен, что музыка должна объединять людей, пробуждать в них доброту и отзывчивость, готовность помогать друг другу. В 2008 году он выступил с концертом в память о жертвах среди мирного населения в Цхинвале, в 2016 году – в Сирии. Валерий Гергиев дирижировал оркестром на церемониях открытия и закрытия зимней Олимпиады в Сочи в 2014 году. В декабре 2023 года дирижёр был назначен генеральным директором Большого театра в Москве. Искусство Валерия Гергиева востребовано во всём мире.</p>`,
             questions: ["Где вырос Валерий Абисалович Гергиев?","Какими чертами характеризуется дирижёрское искусство Гергиева?","Как изменился репертуар Мариинского театра под руководством Валерия Абисаловича?","В каких торжественных мероприятиях Валерий Абисалович Гергиев выступал как дирижёр?","Какой вклад Валерия Абисаловича Гергиева в культуру отражён в словах оперного певца Дмитрия Александровича Хворостовского: «Гергиев – это наша гордость, наше достоинство. Я считаю, он настоящий герой»? Обоснуйте Ваш ответ, приведя пример или примеры из прочитанного текста."],
             topics: [
-                { icon: '<img src="https://images.unsplash.com/photo-1583500178450-e59e4309b57a?auto=format&fit=crop&w=500&q=80" alt="Пилот">', title: "Тема 1. Профессиональный выбор (описание фото)", text: "Опишите фотографию (военный лётчик).", help: "Представитель какой профессии? Каков внешний вид? Где сфотографирован? В чём важность профессии?" },
-                { icon: '🗿', title: "Тема 2. Памятник, который запомнился (повествование)", text: "Расскажите о памятнике, который вам запомнился.", help: "Что это за памятник, где он? Как выглядит? Когда увидели впервые? Почему запомнился?" },
-                { icon: '🇷🇺', title: "Тема 3. Что значит быть гражданином? (рассуждение)", text: "Порассуждайте на тему «Что значит быть гражданином?».", help: "Что значит Родина? Почему беречь культурное наследие? Зачем знать историю? Как относиться к природе?" }
+                { icon: `<img src="${professionsPool[0].img}" alt="Пилот">`, title: "Тема 1. Профессиональный выбор (описание фото)", text: "Опишите фотографию (пилот).", help: "Представитель какой профессии? Каков внешний вид? Где сфотографирован? В чём важность профессии?" },
+                { icon: `<img src="${narrativesPool[0].img}" alt="Памятник">`, title: "Тема 2. Памятник, который запомнился (повествование)", text: "Расскажите о памятнике, который вам запомнился.", help: "Что это за памятник, где он? Как выглядит? Когда увидели впервые? Почему запомнился?" },
+                { icon: `<img src="${conceptsPool[0].img}" alt="Гражданин">`, title: "Тема 3. Что значит быть гражданином? (рассуждение)", text: "Порассуждайте на тему «Что значит быть гражданином?».", help: "Что значит Родина? Почему беречь культурное наследие? Зачем знать историю? Как относиться к природе?" }
             ]
         }
     ];
 
+    // Заполняем остальные 12 базовых вариантов, используя картинки из пулов
     const names = ["Терешкова", "Алферов", "Гагарин", "Пушкин", "Менделеев", "Чайковский", "Ковалевская", "Рахманинов", "Павлов", "Дашкова", "Циолковский", "Туполев"];
     for(let i=0; i<12; i++) {
+        let prof = professionsPool[(i+1) % professionsPool.length];
+        let narr = narrativesPool[(i+1) % narrativesPool.length];
+        let conc = conceptsPool[(i+1) % conceptsPool.length];
+
         baseVariants.push({
             name: names[i],
             task1Instruction: "Выразительно прочитайте текст о выдающемся деятеле " + names[i] + ".",
             text: `<p>Этот текст посвящен жизни и деятельности выдающегося человека — ${names[i]}. Он внес огромный вклад в развитие нашей страны и мировой культуры. С детства он проявлял невероятные способности и трудолюбие.</p><p>Его путь был непростым, но упорство и вера в свое дело помогли ему добиться выдающихся результатов. О его достижениях знают во всем мире.</p><p>Благодаря его труду, мы до сих пор пользуемся плодами его открытий и восхищаемся его талантом. Память о нем жива в сердцах благодарных потомков.</p>`,
             questions: ["Где родился этот человек?", "Какие черты характера помогли ему добиться успеха?", "В чем заключается его главный вклад?", "Как его достижения повлияли на мир?", "Как вы понимаете его главный жизненный принцип?"],
             topics: [
-                { icon: '<img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=500&q=80" alt="Врач">', title: "Тема 1. Профессиональный выбор (описание фото)", text: "Опишите фотографию (врач).", help: "Кто изображён? Как одет? Что делает? Почему профессия важна?" },
-                { icon: '📖', title: "Тема 2. Книга, которая меня впечатлила", text: "Расскажите о книге.", help: "Автор? О чём она? Какие эмоции вызвала?" },
-                { icon: '🎯', title: "Тема 3. Важно ли иметь цель в жизни?", text: "Порассуждайте.", help: "Что такое цель? Как она помогает?" }
+                { icon: `<img src="${prof.img}" alt="${prof.title}">`, title: "Тема 1. Профессиональный выбор (описание фото)", text: `Опишите фотографию (${prof.title.toLowerCase()}).`, help: "Кто изображён? Как одет? Что делает? Почему профессия важна?" },
+                { icon: `<img src="${narr.img}" alt="${narr.title}">`, title: `Тема 2. ${narr.title} (повествование)`, text: `Расскажите о теме: ${narr.title.toLowerCase()}.`, help: "Что это? Где находится? Какие эмоции вызывает?" },
+                { icon: `<img src="${conc.img}" alt="${conc.title}">`, title: `Тема 3. ${conc.title} (рассуждение)`, text: `Порассуждайте на тему «${conc.title}».`, help: "Почему это важно? Как это влияет на жизнь?" }
             ]
         });
     }
 
-    const imagesPool = [
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80",
-        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80"
-    ];
-
+    // ==========================================
+    // ГЕНЕРАЦИЯ ОСТАЛЬНЫХ 177 ВАРИАНТОВ (до 190)
+    // ==========================================
     const variants = [...baseVariants];
 
     for(let i = 14; i <= 190; i++) {
-        const randomImg = imagesPool[Math.floor(Math.random() * imagesPool.length)];
-        
+        // Берем картинки по кругу, чтобы они не повторялись подряд
+        let prof = professionsPool[i % professionsPool.length];
+        let narr = narrativesPool[i % narrativesPool.length];
+        let conc = conceptsPool[i % conceptsPool.length];
+
         variants.push({
             name: "Испытание " + i,
             task1Instruction: "Выразительно прочитайте текст. (Вариант сгенерирован Черной Королевой).",
@@ -450,9 +492,9 @@
                 "Как ты понимаешь фразу: «Каждое слово — это шаг к спасению»?"
             ],
             topics: [
-                { icon: `<img src="${randomImg}" alt="Фото">`, title: "Тема 1. Тайна Черной Королевы (описание фото)", text: "Опишите фотографию.", help: "Что вы видите? Какое настроение передает фото? Какие эмоции оно вызывает?" },
-                { icon: '🃏', title: "Тема 2. Время в Стране Чудес (повествование)", text: "Расскажите о моменте, когда вы чувствовали себя как в сказке.", help: "Где это было? Что произошло? Почему это запомнилось?" },
-                { icon: '👑', title: "Тема 3. Что такое справедливость? (рассуждение)", text: "Порассуждайте на тему «Что такое справедливость?».", help: "Всегда ли наказание справедливо? Может ли милосердие быть выше закона?" }
+                { icon: `<img src="${prof.img}" alt="${prof.title}">`, title: "Тема 1. Профессиональный выбор (описание фото)", text: `Опишите фотографию (${prof.title.toLowerCase()}).`, help: "Что вы видите? Какое настроение передает фото? Какие эмоции оно вызывает?" },
+                { icon: `<img src="${narr.img}" alt="${narr.title}">`, title: `Тема 2. ${narr.title} (повествование)`, text: `Расскажите о моменте, связанном с темой «${narr.title}».`, help: "Где это было? Что произошло? Почему это запомнилось?" },
+                { icon: `<img src="${conc.img}" alt="${conc.title}">`, title: `Тема 3. ${conc.title} (рассуждение)`, text: `Порассуждайте на тему «${conc.title}».`, help: "Всегда ли наказание справедливо? Может ли милосердие быть выше закона?" }
             ]
         });
     }
@@ -461,8 +503,8 @@
     // ЛОГИКА ИНТЕРФЕЙСА
     // ==========================================
     let currentVariantIndex = 0;
-    let isTeacherMode = false; // Изначально скрыто
-    const TEACHER_PASSWORD = "Kir23:55"; // ПАРОЛЬ УЧИТЕЛЯ
+    let isTeacherMode = false;
+    const TEACHER_PASSWORD = "Kir23:55";
     
     const timers = {
         1: { time: 120, initial: 120, interval: null, running: false },
@@ -490,22 +532,18 @@
         renderVariant(currentVariantIndex);
     }
 
-    // ЛОГИКА РЕЖИМА УЧИТЕЛЯ С ПАРОЛЕМ
     function toggleTeacherMode() {
         const wrapper = document.getElementById('questionsWrapper');
         const btn = document.getElementById('teacherBtn');
         
         if (isTeacherMode) {
-            // Если уже открыто — просто скрываем без пароля
             isTeacherMode = false;
             wrapper.classList.add('hidden-for-student');
             btn.textContent = "👁️ ПОКАЗАТЬ ВОПРОСЫ (УЧИТЕЛЬ)";
             btn.style.background = "#000";
             btn.style.color = "#ff3333";
         } else {
-            // Если скрыто — просим пароль
             const enteredPassword = prompt("Введите код доступа Экзаменатора:");
-            
             if (enteredPassword === TEACHER_PASSWORD) {
                 isTeacherMode = true;
                 wrapper.classList.remove('hidden-for-student');
@@ -513,8 +551,6 @@
                 btn.style.background = "#e74c3c";
                 btn.style.color = "#fff";
             } else if (enteredPassword !== null) {
-                // Если нажали "Отмена", enteredPassword === null
-                // Если ввели неправильный пароль:
                 alert("ДОСТУП ЗАПРЕЩЕН!\nЧерная Королева недовольна вашей дерзостью. Попробуйте снова.");
             }
         }
@@ -523,15 +559,12 @@
     function renderVariant(index) {
         const v = variants[index];
 
-        // Случайный приказ Королевы
         const quote = queenQuotes[Math.floor(Math.random() * queenQuotes.length)];
         document.getElementById('queenNote').textContent = quote;
 
-        // Задание 1
         document.getElementById('task1-instruction').textContent = v.task1Instruction;
         document.getElementById('reading-text').innerHTML = v.text;
 
-        // Задание 2
         const qContainer = document.getElementById('questions-container');
         qContainer.innerHTML = '';
         v.questions.forEach((q, i) => {
@@ -546,7 +579,6 @@
             qContainer.appendChild(div);
         });
 
-        // Задание 3
         const tContainer = document.getElementById('topics-container');
         tContainer.innerHTML = '';
         v.topics.forEach(t => {
@@ -598,9 +630,7 @@
                     btn.textContent = 'Старт';
                     btn.classList.remove('stop');
                     display.textContent = "00:00";
-                    
                     alert("Время вышло! Черная Королева пришла в ярость. Испытание провалено.");
-                    
                     t.time = t.initial;
                     updateDisplay(id, t.time);
                     return;
