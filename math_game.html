@@ -55,6 +55,7 @@
         text-align: center;
         box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         display: none;
+        position: relative; /* Для позиционирования кнопки админа */
     }
     .screen.active { display: block; animation: fadeIn 0.5s ease; }
     
@@ -172,16 +173,27 @@
     /* Секретная кнопка */
     .admin-toggle {
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: 10px;
+        right: 15px;
         background: transparent;
-        color: rgba(255,255,255,0.2);
+        color: rgba(255,255,255,0.3);
         border: none;
-        font-size: 12px;
+        font-size: 20px;
         cursor: pointer;
         transition: 0.3s;
     }
-    .admin-toggle:hover { color: rgba(255,255,255,0.8); }
+    .admin-toggle:hover { color: rgba(255,255,255,0.9); transform: scale(1.2); }
+
+    /* Стили для оценок */
+    .grade-box {
+        background: rgba(0,0,0,0.2);
+        padding: 15px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        border-left: 5px solid #e74c3c;
+    }
+    .grade-text { font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+    .punishment-text { font-size: 16px; color: #ffb8b8; font-style: italic; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
@@ -198,6 +210,9 @@
         <h1>Математический Штурм</h1>
         <p>Ситуация накаляется. Училка вызывает директора.<br>Чтобы спастись, нужно ответить на вопросы по теории 5-7 класса.<br><br><strong>У тебя 3 жизни. Ошибёшься 3 раза — пойдёшь сдавать зачёт лично директору.</strong></p>
         <button class="btn" onclick="startGame()">Начать игру</button>
+        
+        <!-- Кнопка режима учителя теперь ЗДЕСЬ -->
+        <button class="admin-toggle" onclick="toggleTeacherMode()" title="Режим учителя">🔐</button>
     </div>
 
     <!-- Игровой экран -->
@@ -221,8 +236,16 @@
     <!-- Экран Game Over -->
     <div id="endScreen" class="screen">
         <h1 id="endTitle">Игра Окончена</h1>
-        <p id="endMessage">Ты не справился...</p>
-        <p style="font-size: 24px; color: #f1c40f; font-weight: bold; margin-bottom: 20px;">Твой счёт: <span id="finalScore">0</span></p>
+        
+        <!-- Блок с оценкой и процентами -->
+        <div class="grade-box" id="gradeBox">
+            <div class="grade-text" id="finalGradeDisplay">Оценка: -</div>
+            <div>Процент выполнения: <span id="finalPercentage">0%</span></div>
+            <div class="punishment-text" id="punishmentText">...</div>
+        </div>
+
+        <p style="font-size: 20px; color: #f1c40f; font-weight: bold; margin-bottom: 20px;">Очки: <span id="finalScore">0</span></p>
+        
         <button class="btn" onclick="startGame()">Попробовать снова</button>
         
         <!-- Блок для результатов учителя -->
@@ -231,9 +254,6 @@
             <div id="resultsList"></div>
         </div>
     </div>
-
-    <!-- Секретная кнопка активации режима учителя -->
-    <button class="admin-toggle" onclick="toggleTeacherMode()">•</button>
 
     <!-- Подпись Черной Королевы -->
     <div style="text-align: center; margin-top: 30px; opacity: 0.7; font-style: italic; font-size: 14px; color: #ccc; letter-spacing: 1px;">
@@ -244,7 +264,11 @@
 <script>
     const SECRET_PASSWORD = "admin"; // Пароль для режима учителя
     let isTeacherMode = false;
-    let gameLog = []; // Здесь храним историю ответов
+    let gameLog = []; 
+    
+    // Счетчики для оценок
+    let correctCount = 0;
+    let totalCount = 0;
 
     const gameQuestions = [
         { q: "Как сложить две дроби с разными знаменателями?", options: ["Сложить числители и знаменатели", "Привести к общему знаменателю", "Умножить всё на 2", "Перевести в проценты"], correct: 1 },
@@ -286,9 +310,12 @@
         score = 0;
         lives = 3;
         canAnswer = true;
-        gameLog = []; // Очищаем лог при новом старте
+        correctCount = 0; // Сброс правильных ответов
+        totalCount = 0;   // Сброс общего количества
+        gameLog = []; 
         
-        document.getElementById('teacherResults').style.display = 'none'; // Скрываем отчет
+        document.getElementById('teacherResults').style.display = 'none'; 
+        document.getElementById('gradeBox').style.display = 'none'; // Скрываем оценки на старте
         updateUI();
         loadQuestion();
     }
@@ -302,7 +329,6 @@
         const questionData = currentQuestions[currentIndex];
         document.getElementById('questionText').innerText = questionData.q;
         
-        // Показываем кнопку подсказки, если включен режим учителя
         document.getElementById('cheatBtn').style.display = isTeacherMode ? 'block' : 'none';
 
         const optionsWithIndex = questionData.options.map((opt, index) => ({ text: opt, originalIndex: index }));
@@ -326,8 +352,8 @@
     function checkAnswer(btn, isCorrect, userAnswerText, questionData) {
         if (!canAnswer) return;
         canAnswer = false;
+        totalCount++; // Увеличиваем счетчик вопросов
 
-        // Записываем в лог
         gameLog.push({
             question: questionData.q,
             userAnswer: userAnswerText,
@@ -337,9 +363,10 @@
 
         const allBtns = document.querySelectorAll('.option-btn');
         allBtns.forEach(b => b.disabled = true);
-        document.getElementById('cheatBtn').style.display = 'none'; // Прячем подсказку
+        document.getElementById('cheatBtn').style.display = 'none'; 
 
         if (isCorrect) {
+            correctCount++; // Увеличиваем счетчик правильных
             btn.classList.add('correct');
             score += 100;
             document.getElementById('scoreDisplay').innerText = `Очки: ${score}`;
@@ -376,17 +403,52 @@
         
         document.getElementById('finalScore').innerText = score;
         
+        // --- ЛОГИКА ОЦЕНОК И ПРОЦЕНТОВ ---
+        const gradeBox = document.getElementById('gradeBox');
+        const gradeDisplay = document.getElementById('finalGradeDisplay');
+        const percentDisplay = document.getElementById('finalPercentage');
+        const punishmentDisplay = document.getElementById('punishmentText');
+        
+        gradeBox.style.display = 'block';
+        
+        // Высчитываем процент (чтобы не было деления на 0)
+        let percentage = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+        percentDisplay.innerText = percentage + '%';
+
+        // Определяем оценку и строгое наказание
+        let grade = "2";
+        let borderColor = "#e74c3c";
+        
+        if (percentage >= 90) {
+            grade = "5 (Отлично)";
+            borderColor = "#2ecc71";
+            punishmentDisplay.innerText = "Безупречно. Королева милостива, ты спасен от плахи. 🎉👑";
+        } else if (percentage >= 75) {
+            grade = "4 (Хорошо)";
+            borderColor = "#f1c40f";
+            punishmentDisplay.innerText = "Неплохо, но Чёрная Королева следит за тобой. Не расслабляйся! 👀♟️";
+        } else if (percentage >= 50) {
+            grade = "3 (Удовлетворительно)";
+            borderColor = "#e67e22";
+            punishmentDisplay.innerText = "Жалкий результат. Готовься к порке линейкой по рукам! 📏👞";
+        } else {
+            grade = "2 (Неудовлетворительно)";
+            borderColor = "#e74c3c";
+            punishmentDisplay.innerText = "ТЕЛЕСНОЕ НАКАЗАНИЕ НЕИЗБЕЖНО. Королева приказала выпороть тебя розгами! 🪓🩸";
+        }
+
+        gradeDisplay.innerText = `Оценка: ${grade}`;
+        gradeDisplay.style.color = borderColor;
+        gradeBox.style.borderLeftColor = borderColor;
+
         if (isWin) {
             document.getElementById('endTitle').innerText = "ПОБЕДА!";
             document.getElementById('endTitle').style.color = "#2ecc71";
-            document.getElementById('endMessage').innerText = "Ты сдал зачёт и спас свой класс!";
         } else {
             document.getElementById('endTitle').innerText = "GAME OVER";
             document.getElementById('endTitle').style.color = "#e74c3c";
-            document.getElementById('endMessage').innerText = "Ты потерял все жизни. Директор ждёт тебя...";
         }
 
-        // Если включен режим учителя - показываем отчет
         if (isTeacherMode) {
             renderTeacherResults();
         }
@@ -420,7 +482,6 @@
         const questionData = currentQuestions[currentIndex];
         const allBtns = document.querySelectorAll('.option-btn');
         
-        // Подсвечиваем правильный ответ зеленым на 2 секунды
         allBtns.forEach(b => {
             if (b.innerText === questionData.options[questionData.correct]) {
                 b.style.borderColor = '#2ecc71';
